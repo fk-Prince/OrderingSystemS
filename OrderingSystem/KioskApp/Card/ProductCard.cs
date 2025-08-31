@@ -70,7 +70,8 @@ namespace OrderingSystem.KioskApp.Card
         {
             FillColor = Color.LightGray;
             BorderRadius = 10;
-            BorderThickness = 1; ;
+
+            //BorderThickness = 1; ;
         }
 
         private void setMaxOrder()
@@ -152,6 +153,9 @@ namespace OrderingSystem.KioskApp.Card
             await UpdateMaxOrder();
         }
 
+        private void image_Click(object sender, System.EventArgs e)
+        {
 
+        }
     }
 }

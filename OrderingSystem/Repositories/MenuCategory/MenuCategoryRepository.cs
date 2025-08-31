@@ -18,7 +18,7 @@ namespace OrderingSystem.Repositories.Categories
 
                 var conn = await db.GetConnection();
                 string query = @"
-                                SELECT * FROM dishes_category dc
+                                SELECT DISTINCT dc.dishes_category_id, dc.* FROM dishes_category dc
                                 INNER JOIN dishes d ON dc.dishes_category_id = d.category_id
                                 ";
                 var cmd = new MySqlCommand(query, conn);

@@ -52,7 +52,6 @@
             this.add = new Guna.UI2.WinForms.Guna2PictureBox();
             this.minus = new Guna.UI2.WinForms.Guna2PictureBox();
             this.drop = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
@@ -69,15 +68,15 @@
             this.name.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.name.Location = new System.Drawing.Point(4, 1);
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(160, 44);
+            this.name.Size = new System.Drawing.Size(291, 25);
             this.name.TabIndex = 0;
-            this.name.Text = "label1\r\nasd\r\n";
+            this.name.Text = "label1\r\n";
             // 
             // price
             // 
             this.price.BackColor = System.Drawing.Color.Transparent;
             this.price.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.price.Location = new System.Drawing.Point(83, 75);
+            this.price.Location = new System.Drawing.Point(83, 81);
             this.price.Name = "price";
             this.price.Size = new System.Drawing.Size(81, 17);
             this.price.TabIndex = 6;
@@ -89,7 +88,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.label3.Location = new System.Drawing.Point(66, 73);
+            this.label3.Location = new System.Drawing.Point(66, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 19);
             this.label3.TabIndex = 7;
@@ -100,7 +99,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.label1.Location = new System.Drawing.Point(8, 73);
+            this.label1.Location = new System.Drawing.Point(8, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 19);
             this.label1.TabIndex = 5;
@@ -110,7 +109,7 @@
             // 
             this.tqty.BackColor = System.Drawing.Color.Transparent;
             this.tqty.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.tqty.Location = new System.Drawing.Point(83, 95);
+            this.tqty.Location = new System.Drawing.Point(83, 101);
             this.tqty.Name = "tqty";
             this.tqty.Size = new System.Drawing.Size(81, 17);
             this.tqty.TabIndex = 9;
@@ -122,7 +121,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.label5.Location = new System.Drawing.Point(8, 95);
+            this.label5.Location = new System.Drawing.Point(8, 101);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 19);
             this.label5.TabIndex = 8;
@@ -132,7 +131,7 @@
             // 
             this.total.BackColor = System.Drawing.Color.Transparent;
             this.total.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.total.Location = new System.Drawing.Point(83, 119);
+            this.total.Location = new System.Drawing.Point(83, 125);
             this.total.Name = "total";
             this.total.Size = new System.Drawing.Size(81, 19);
             this.total.TabIndex = 11;
@@ -144,7 +143,7 @@
             this.totallbl.AutoSize = true;
             this.totallbl.BackColor = System.Drawing.Color.Transparent;
             this.totallbl.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.totallbl.Location = new System.Drawing.Point(8, 119);
+            this.totallbl.Location = new System.Drawing.Point(8, 125);
             this.totallbl.Name = "totallbl";
             this.totallbl.Size = new System.Drawing.Size(38, 19);
             this.totallbl.TabIndex = 10;
@@ -155,10 +154,12 @@
             this.guna2Panel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel2.BorderRadius = 10;
             this.guna2Panel2.BorderThickness = 1;
-            this.guna2Panel2.Controls.Add(this.guna2PictureBox2);
             this.guna2Panel2.Controls.Add(this.image);
+            this.guna2Panel2.CustomizableEdges.BottomLeft = false;
+            this.guna2Panel2.CustomizableEdges.BottomRight = false;
+            this.guna2Panel2.CustomizableEdges.TopLeft = false;
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
-            this.guna2Panel2.Location = new System.Drawing.Point(170, 0);
+            this.guna2Panel2.Location = new System.Drawing.Point(170, 35);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(159, 85);
             this.guna2Panel2.TabIndex = 12;
@@ -170,7 +171,7 @@
             this.guna2PictureBox2.FillColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
             this.guna2PictureBox2.ImageRotate = 0F;
-            this.guna2PictureBox2.Location = new System.Drawing.Point(133, -3);
+            this.guna2PictureBox2.Location = new System.Drawing.Point(301, 1);
             this.guna2PictureBox2.Name = "guna2PictureBox2";
             this.guna2PictureBox2.Size = new System.Drawing.Size(25, 25);
             this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -182,6 +183,9 @@
             // image
             // 
             this.image.BorderRadius = 10;
+            this.image.CustomizableEdges.BottomLeft = false;
+            this.image.CustomizableEdges.BottomRight = false;
+            this.image.CustomizableEdges.TopLeft = false;
             this.image.Dock = System.Windows.Forms.DockStyle.Fill;
             this.image.FillColor = System.Drawing.Color.Transparent;
             this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
@@ -197,7 +201,7 @@
             // 
             this.ItemType.AutoSize = true;
             this.ItemType.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ItemType.Location = new System.Drawing.Point(19, 45);
+            this.ItemType.Location = new System.Drawing.Point(21, 26);
             this.ItemType.Name = "ItemType";
             this.ItemType.Size = new System.Drawing.Size(38, 13);
             this.ItemType.TabIndex = 13;
@@ -214,18 +218,18 @@
             this.addonButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.addonButton.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.addonButton.ForeColor = System.Drawing.Color.Black;
-            this.addonButton.Location = new System.Drawing.Point(10, 4);
+            this.addonButton.Location = new System.Drawing.Point(3, 4);
             this.addonButton.Name = "addonButton";
-            this.addonButton.Size = new System.Drawing.Size(79, 29);
+            this.addonButton.Size = new System.Drawing.Size(116, 29);
             this.addonButton.TabIndex = 15;
-            this.addonButton.Text = "Adds-On";
+            this.addonButton.Text = "Customized";
             this.addonButton.Click += new System.EventHandler(this.showAddonButton);
             // 
             // addlbl
             // 
             this.addlbl.AutoSize = true;
             this.addlbl.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.addlbl.Location = new System.Drawing.Point(8, 119);
+            this.addlbl.Location = new System.Drawing.Point(8, 125);
             this.addlbl.Name = "addlbl";
             this.addlbl.Size = new System.Drawing.Size(62, 19);
             this.addlbl.TabIndex = 17;
@@ -236,7 +240,7 @@
             // 
             this.addtotal.BackColor = System.Drawing.Color.Transparent;
             this.addtotal.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.addtotal.Location = new System.Drawing.Point(83, 119);
+            this.addtotal.Location = new System.Drawing.Point(83, 125);
             this.addtotal.Name = "addtotal";
             this.addtotal.Size = new System.Drawing.Size(81, 19);
             this.addtotal.TabIndex = 18;
@@ -249,7 +253,7 @@
             this.plbl.AutoSize = true;
             this.plbl.BackColor = System.Drawing.Color.Transparent;
             this.plbl.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.plbl.Location = new System.Drawing.Point(66, 119);
+            this.plbl.Location = new System.Drawing.Point(66, 125);
             this.plbl.Name = "plbl";
             this.plbl.Size = new System.Drawing.Size(17, 19);
             this.plbl.TabIndex = 19;
@@ -261,7 +265,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.label4.Location = new System.Drawing.Point(66, 119);
+            this.label4.Location = new System.Drawing.Point(66, 125);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 19);
             this.label4.TabIndex = 20;
@@ -274,7 +278,7 @@
             this.pp.Controls.Add(this.add);
             this.pp.Controls.Add(this.minus);
             this.pp.Controls.Add(this.drop);
-            this.pp.Location = new System.Drawing.Point(8, 152);
+            this.pp.Location = new System.Drawing.Point(11, 153);
             this.pp.Name = "pp";
             this.pp.Size = new System.Drawing.Size(317, 39);
             this.pp.TabIndex = 21;
@@ -330,7 +334,7 @@
             this.drop.Cursor = System.Windows.Forms.Cursors.Hand;
             this.drop.Image = global::OrderingSystem.Properties.Resources.dropdown;
             this.drop.ImageRotate = 180F;
-            this.drop.Location = new System.Drawing.Point(93, 6);
+            this.drop.Location = new System.Drawing.Point(125, 7);
             this.drop.Name = "drop";
             this.drop.Size = new System.Drawing.Size(28, 23);
             this.drop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -339,26 +343,11 @@
             this.drop.Visible = false;
             this.drop.Click += new System.EventHandler(this.dropdownClicked);
             // 
-            // guna2Button1
-            // 
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(284, 101);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(34, 45);
-            this.guna2Button1.TabIndex = 22;
-            this.guna2Button1.Text = "guna2Button1";
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
-            // 
             // CartCard
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
-            this.ClientSize = new System.Drawing.Size(328, 193);
-            this.Controls.Add(this.guna2Button1);
+            this.ClientSize = new System.Drawing.Size(328, 195);
+            this.Controls.Add(this.guna2PictureBox2);
             this.Controls.Add(this.pp);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.plbl);
@@ -414,6 +403,5 @@
         private Guna.UI2.WinForms.Guna2PictureBox image;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private System.Windows.Forms.Label qty;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
     }
 }

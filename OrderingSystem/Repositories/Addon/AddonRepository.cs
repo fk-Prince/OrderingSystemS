@@ -73,7 +73,7 @@ namespace OrderingSystem.KioskApp.AddsOn
                         while (await reader.ReadAsync())
                         {
                             l.Add(
-                                 MenuBuilder.MenuBuilderFactory.BuildFromSQL(reader) as Addon
+                                MenuBuilderFactory.BuildFromSQL(reader) as Addon
                              );
                         }
 

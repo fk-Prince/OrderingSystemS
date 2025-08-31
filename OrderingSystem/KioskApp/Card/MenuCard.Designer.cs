@@ -33,21 +33,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.price = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.image = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.outStock = new Guna.UI2.WinForms.Guna2PictureBox();
             this.name = new System.Windows.Forms.Label();
-            this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.max = new System.Windows.Forms.Label();
             this.maxlabel = new System.Windows.Forms.Label();
             this.desc = new System.Windows.Forms.Label();
             this.st = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.outStock = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.image = new Guna.UI2.WinForms.Guna2PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
             this.guna2Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.outStock)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             this.st.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outStock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
             this.SuspendLayout();
             // 
             // quantity
@@ -56,9 +56,9 @@
             this.quantity.BorderRadius = 5;
             this.quantity.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.quantity.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.quantity.Location = new System.Drawing.Point(172, 17);
+            this.quantity.Location = new System.Drawing.Point(172, 19);
             this.quantity.Name = "quantity";
-            this.quantity.Size = new System.Drawing.Size(63, 32);
+            this.quantity.Size = new System.Drawing.Size(63, 30);
             this.quantity.TabIndex = 0;
             // 
             // label1
@@ -66,7 +66,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 25);
+            this.label1.Location = new System.Drawing.Point(6, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 20);
             this.label1.TabIndex = 1;
@@ -76,7 +76,7 @@
             // 
             this.price.BackColor = System.Drawing.Color.Transparent;
             this.price.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.price.Location = new System.Drawing.Point(65, 25);
+            this.price.Location = new System.Drawing.Point(59, 24);
             this.price.Name = "price";
             this.price.Size = new System.Drawing.Size(66, 17);
             this.price.TabIndex = 2;
@@ -87,55 +87,28 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(50, 25);
+            this.label3.Location = new System.Drawing.Point(44, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(18, 20);
             this.label3.TabIndex = 3;
             this.label3.Text = "₱";
             // 
-            // image
-            // 
-            this.image.BackColor = System.Drawing.Color.Transparent;
-            this.image.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.image.BorderRadius = 10;
-            this.image.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
-            this.image.ImageRotate = 0F;
-            this.image.Location = new System.Drawing.Point(0, 0);
-            this.image.Name = "image";
-            this.image.Size = new System.Drawing.Size(250, 105);
-            this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.image.TabIndex = 4;
-            this.image.TabStop = false;
-            // 
             // guna2Panel1
             // 
+            this.guna2Panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.guna2Panel1.BorderRadius = 10;
             this.guna2Panel1.Controls.Add(this.outStock);
             this.guna2Panel1.Controls.Add(this.image);
+            this.guna2Panel1.CustomizableEdges.BottomLeft = false;
+            this.guna2Panel1.CustomizableEdges.BottomRight = false;
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
+            this.guna2Panel1.Location = new System.Drawing.Point(1, 1);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(250, 105);
+            this.guna2Panel1.Size = new System.Drawing.Size(244, 105);
             this.guna2Panel1.TabIndex = 5;
-            // 
-            // outStock
-            // 
-            this.outStock.BackColor = System.Drawing.Color.Transparent;
-            this.outStock.BorderRadius = 50;
-            this.outStock.FillColor = System.Drawing.Color.Transparent;
-            this.outStock.Image = ((System.Drawing.Image)(resources.GetObject("outStock.Image")));
-            this.outStock.ImageRotate = 0F;
-            this.outStock.Location = new System.Drawing.Point(-3, 3);
-            this.outStock.MinimumSize = new System.Drawing.Size(184, 56);
-            this.outStock.Name = "outStock";
-            this.outStock.Size = new System.Drawing.Size(250, 107);
-            this.outStock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.outStock.TabIndex = 13;
-            this.outStock.TabStop = false;
-            this.outStock.UseTransparentBackground = true;
             // 
             // name
             // 
@@ -147,21 +120,6 @@
             this.name.TabIndex = 6;
             this.name.Text = "label4\r\nvasd\r\n";
             this.name.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // guna2PictureBox2
-            // 
-            this.guna2PictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2PictureBox2.FillColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox2.Image = global::OrderingSystem.Properties.Resources.add;
-            this.guna2PictureBox2.ImageRotate = 0F;
-            this.guna2PictureBox2.Location = new System.Drawing.Point(139, 18);
-            this.guna2PictureBox2.Name = "guna2PictureBox2";
-            this.guna2PictureBox2.Size = new System.Drawing.Size(28, 28);
-            this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.guna2PictureBox2.TabIndex = 7;
-            this.guna2PictureBox2.TabStop = false;
-            this.guna2PictureBox2.Click += new System.EventHandler(this.AddItem);
             // 
             // max
             // 
@@ -215,6 +173,55 @@
             this.st.Size = new System.Drawing.Size(247, 59);
             this.st.TabIndex = 5;
             // 
+            // guna2PictureBox2
+            // 
+            this.guna2PictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2PictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2PictureBox2.FillColor = System.Drawing.Color.Transparent;
+            this.guna2PictureBox2.Image = global::OrderingSystem.Properties.Resources.add;
+            this.guna2PictureBox2.ImageRotate = 0F;
+            this.guna2PictureBox2.Location = new System.Drawing.Point(138, 20);
+            this.guna2PictureBox2.Name = "guna2PictureBox2";
+            this.guna2PictureBox2.Size = new System.Drawing.Size(28, 28);
+            this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.guna2PictureBox2.TabIndex = 7;
+            this.guna2PictureBox2.TabStop = false;
+            this.guna2PictureBox2.Click += new System.EventHandler(this.AddItem);
+            // 
+            // outStock
+            // 
+            this.outStock.BackColor = System.Drawing.Color.Transparent;
+            this.outStock.BorderRadius = 50;
+            this.outStock.FillColor = System.Drawing.Color.Transparent;
+            this.outStock.Image = global::OrderingSystem.Properties.Resources.osp;
+            this.outStock.ImageRotate = 20F;
+            this.outStock.Location = new System.Drawing.Point(3, -1);
+            this.outStock.MinimumSize = new System.Drawing.Size(184, 56);
+            this.outStock.Name = "outStock";
+            this.outStock.Size = new System.Drawing.Size(241, 107);
+            this.outStock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.outStock.TabIndex = 13;
+            this.outStock.TabStop = false;
+            this.outStock.UseTransparentBackground = true;
+            // 
+            // image
+            // 
+            this.image.BackColor = System.Drawing.Color.Transparent;
+            this.image.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.image.BorderRadius = 10;
+            this.image.CustomizableEdges.BottomLeft = false;
+            this.image.CustomizableEdges.BottomRight = false;
+            this.image.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
+            this.image.ImageRotate = 0F;
+            this.image.Location = new System.Drawing.Point(0, 0);
+            this.image.Name = "image";
+            this.image.Size = new System.Drawing.Size(244, 105);
+            this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.image.TabIndex = 4;
+            this.image.TabStop = false;
+            this.image.UseTransparentBackground = true;
+            // 
             // MenuCard
             // 
             this.ClientSize = new System.Drawing.Size(246, 262);
@@ -225,12 +232,12 @@
             this.Name = "MenuCard";
             this.Text = "MenuCard";
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.outStock)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
             this.st.ResumeLayout(false);
             this.st.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outStock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
             this.ResumeLayout(false);
 
         }

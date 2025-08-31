@@ -350,7 +350,7 @@ namespace OrderingSystem.KioskApp
             Guna2Button b = (Guna2Button)sender;
             if (lastClcked != b)
             {
-                lastClcked.ForeColor = Color.White;
+                lastClcked.ForeColor = Color.FromArgb(34, 34, 34);
                 b.ForeColor = Color.FromArgb(94, 148, 255);
                 lastClcked = b;
             }
@@ -421,7 +421,10 @@ namespace OrderingSystem.KioskApp
             cFrm.BringToFront();
         }
 
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
     }
 
     public class ClickOutsideRemover : IMessageFilter

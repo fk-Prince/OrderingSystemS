@@ -99,12 +99,14 @@
             this.image.BackColor = System.Drawing.Color.Transparent;
             this.image.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.image.BorderRadius = 10;
+            this.image.CustomizableEdges.BottomLeft = false;
+            this.image.CustomizableEdges.BottomRight = false;
             this.image.Dock = System.Windows.Forms.DockStyle.Fill;
             this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
             this.image.ImageRotate = 0F;
             this.image.Location = new System.Drawing.Point(0, 0);
             this.image.Name = "image";
-            this.image.Size = new System.Drawing.Size(247, 107);
+            this.image.Size = new System.Drawing.Size(245, 107);
             this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.image.TabIndex = 4;
             this.image.TabStop = false;
@@ -115,10 +117,12 @@
             this.guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.guna2Panel1.BorderRadius = 10;
             this.guna2Panel1.Controls.Add(this.image);
+            this.guna2Panel1.CustomizableEdges.BottomLeft = false;
+            this.guna2Panel1.CustomizableEdges.BottomRight = false;
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(0, -1);
+            this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(247, 107);
+            this.guna2Panel1.Size = new System.Drawing.Size(245, 107);
             this.guna2Panel1.TabIndex = 5;
             // 
             // name
@@ -206,7 +210,7 @@
             this.outStock.FillColor = System.Drawing.Color.Transparent;
             this.outStock.Image = ((System.Drawing.Image)(resources.GetObject("outStock.Image")));
             this.outStock.ImageRotate = 0F;
-            this.outStock.Location = new System.Drawing.Point(-1, -2);
+            this.outStock.Location = new System.Drawing.Point(4, 103);
             this.outStock.Name = "outStock";
             this.outStock.Size = new System.Drawing.Size(250, 107);
             this.outStock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

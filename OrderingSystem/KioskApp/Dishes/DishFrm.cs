@@ -206,5 +206,14 @@ namespace OrderingSystem.KioskApp
             isDragging = false;
         }
 
+        private void nextButton(object sender, EventArgs e)
+        {
+
+        }
+
+        private void prevButton(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using OrderingSystem.KioskApp.MenuBuilder;
 using OrderingSystem.Repositories.Kiosk;
@@ -32,16 +33,26 @@ namespace OrderingSystem.KioskApp.Card
             this.cartList = cartList;
             this.kioskRepository = kioskRepository;
             this.HandleCreated += async (s, e) => await updateMaxOrder();
-            //max.Visible = true;
             cartLayout();
             displayMenu();
         }
 
         private void cartLayout()
         {
-            BorderColor = Color.LightGray;
             BorderRadius = 10;
-            BorderThickness = 1;
+            BorderColor = Color.FromArgb(94, 148, 255);
+            enableHover(this);
+        }
+
+        private void enableHover(Control c)
+        {
+            c.MouseEnter += (s, e) => { this.BorderThickness = 2; };
+            c.MouseLeave += (s, e) => { this.BorderThickness = 0; };
+
+            foreach (Control cc in c.Controls)
+            {
+                enableHover(cc);
+            }
         }
         private void displayMenu()
         {

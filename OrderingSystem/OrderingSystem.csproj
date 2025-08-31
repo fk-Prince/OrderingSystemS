@@ -88,12 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\MyDatabase.cs" />
-    <Compile Include="KioskApp\Customized\CustomizedFrm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="KioskApp\Customized\CustomizedFrm.Designer.cs">
-      <DependentUpon>CustomizedFrm.cs</DependentUpon>
-    </Compile>
     <Compile Include="KioskApp\Features\CouponFrm.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -120,11 +114,11 @@
     </Compile>
     <Compile Include="Repositories\Appetizer\AppetizerRepository.cs" />
     <Compile Include="Repositories\Appetizer\IAppetizerRepository.cs" />
-    <Compile Include="KioskApp\AddsOn\AddonDishFrm.cs">
+    <Compile Include="KioskApp\AddsOn\CustomizedFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KioskApp\AddsOn\AddonDishFrm.Designer.cs">
-      <DependentUpon>AddonDishFrm.cs</DependentUpon>
+    <Compile Include="KioskApp\AddsOn\CustomizedFrm.Designer.cs">
+      <DependentUpon>CustomizedFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="KioskApp\Card\AddonCard.cs">
       <SubType>Component</SubType>
@@ -132,11 +126,11 @@
     <Compile Include="KioskApp\Card\AddonCard.Designer.cs">
       <DependentUpon>AddonCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="KioskApp\Card\AddsCart.cs">
+    <Compile Include="KioskApp\Card\AddonCart.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="KioskApp\Card\AddsCart.Designer.cs">
-      <DependentUpon>AddsCart.cs</DependentUpon>
+    <Compile Include="KioskApp\Card\AddonCart.Designer.cs">
+      <DependentUpon>AddonCart.cs</DependentUpon>
     </Compile>
     <Compile Include="KioskApp\Card\CartCard.cs">
       <SubType>Component</SubType>
@@ -217,14 +211,14 @@
     <EmbeddedResource Include="KioskApp\Appetizers\AppetizerFrm.resx">
       <DependentUpon>AppetizerFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KioskApp\AddsOn\AddonDishFrm.resx">
-      <DependentUpon>AddonDishFrm.cs</DependentUpon>
+    <EmbeddedResource Include="KioskApp\AddsOn\CustomizedFrm.resx">
+      <DependentUpon>CustomizedFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KioskApp\Card\AddonCard.resx">
       <DependentUpon>AddonCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KioskApp\Card\AddsCart.resx">
-      <DependentUpon>AddsCart.cs</DependentUpon>
+    <EmbeddedResource Include="KioskApp\Card\AddonCart.resx">
+      <DependentUpon>AddonCart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KioskApp\Card\CartCard.resx">
       <DependentUpon>CartCard.cs</DependentUpon>
@@ -237,9 +231,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KioskApp\Combos\ComboFrm.resx">
       <DependentUpon>ComboFrm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="KioskApp\Customized\CustomizedFrm.resx">
-      <DependentUpon>CustomizedFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KioskApp\Features\CouponFrm.resx">
       <DependentUpon>CouponFrm.cs</DependentUpon>
@@ -312,6 +303,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\placeholder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\osp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

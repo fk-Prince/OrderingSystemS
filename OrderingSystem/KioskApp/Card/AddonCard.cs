@@ -81,5 +81,9 @@ namespace OrderingSystem.KioskApp.Card
             await updateMaxOrder();
         }
 
+        private void price_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

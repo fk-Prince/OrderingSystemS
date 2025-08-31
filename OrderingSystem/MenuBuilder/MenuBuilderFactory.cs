@@ -124,7 +124,7 @@ namespace OrderingSystem.KioskApp.MenuBuilder
                         .SetAddsOnID(reader.GetInt32("addon_id"))
                         .SetType(reader.GetString("menu_type"))
                         .SetAddsOnPrice(reader.GetDouble("price"))
-                        .SetAddsOnDescription(reader.GetString("addon_description"))
+                        //.SetAddsOnDescription(reader.GetString("addon_description"))
                         .SetAddsOnImage(ImageHelper.GetImageFromBlob(reader))
                         .SetAddsOnName(reader.GetString("addon_name"))
                         .SetAddsOnMaxOrder(reader.GetInt32("max_order"))

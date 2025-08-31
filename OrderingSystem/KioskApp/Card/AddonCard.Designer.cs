@@ -35,7 +35,7 @@
             this.add = new Guna.UI2.WinForms.Guna2PictureBox();
             this.qtyy = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.outofstock = new System.Windows.Forms.PictureBox();
+            this.outofstock = new Guna.UI2.WinForms.Guna2PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.add)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qtyy)).BeginInit();
@@ -46,7 +46,7 @@
             // 
             this.image.BackColor = System.Drawing.Color.Transparent;
             this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
-            this.image.Location = new System.Drawing.Point(4, 12);
+            this.image.Location = new System.Drawing.Point(9, 12);
             this.image.Name = "image";
             this.image.Size = new System.Drawing.Size(118, 98);
             this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -83,7 +83,7 @@
             this.add.Cursor = System.Windows.Forms.Cursors.Hand;
             this.add.Image = global::OrderingSystem.Properties.Resources.add;
             this.add.ImageRotate = 0F;
-            this.add.Location = new System.Drawing.Point(182, 82);
+            this.add.Location = new System.Drawing.Point(205, 83);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(42, 30);
             this.add.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -97,9 +97,9 @@
             this.qtyy.BorderRadius = 5;
             this.qtyy.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.qtyy.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.qtyy.Location = new System.Drawing.Point(229, 78);
+            this.qtyy.Location = new System.Drawing.Point(249, 82);
             this.qtyy.Name = "qtyy";
-            this.qtyy.Size = new System.Drawing.Size(69, 36);
+            this.qtyy.Size = new System.Drawing.Size(54, 32);
             this.qtyy.TabIndex = 12;
             // 
             // label1
@@ -117,13 +117,15 @@
             // outofstock
             // 
             this.outofstock.BackColor = System.Drawing.Color.Transparent;
-            this.outofstock.Image = global::OrderingSystem.Properties.Resources.exclamation;
-            this.outofstock.Location = new System.Drawing.Point(58, 12);
+            this.outofstock.Image = ((System.Drawing.Image)(resources.GetObject("outofstock.Image")));
+            this.outofstock.ImageRotate = 15F;
+            this.outofstock.Location = new System.Drawing.Point(11, -1);
             this.outofstock.Name = "outofstock";
-            this.outofstock.Size = new System.Drawing.Size(118, 98);
-            this.outofstock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.outofstock.TabIndex = 14;
+            this.outofstock.Size = new System.Drawing.Size(185, 140);
+            this.outofstock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.outofstock.TabIndex = 15;
             this.outofstock.TabStop = false;
+            this.outofstock.UseTransparentBackground = true;
             // 
             // AddonCard
             // 
@@ -155,6 +157,6 @@
         private Guna.UI2.WinForms.Guna2PictureBox add;
         private Guna.UI2.WinForms.Guna2NumericUpDown qtyy;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox outofstock;
+        private Guna.UI2.WinForms.Guna2PictureBox outofstock;
     }
 }

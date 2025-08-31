@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
-using OrderingSystem.KioskApp.Customized;
 using OrderingSystem.Model;
 using Dish = OrderingSystem.Model.Dish;
 using Menu = OrderingSystem.Model.Menu;
@@ -87,9 +86,10 @@ namespace OrderingSystem.KioskApp.Card
         {
             if (menu is Dish d)
             {
-                AddonDishFrm x = AddonDishFrm.AddonDishFrmFactory(d, cartList);
+                CustomizedFrm x = CustomizedFrm.CustomizedFrmFactory(d, cartList);
                 x.purchaseQuantityChanged += (xe, xr) => displayShit();
-                x.ShowDialog(this);
+                DialogResult rs = x.ShowDialog(this);
+
             }
         }
         private void displayShit()
@@ -116,7 +116,7 @@ namespace OrderingSystem.KioskApp.Card
         }
         private void clearPanel()
         {
-            var panel = this.Controls.OfType<AddsCart>().Cast<Control>()
+            var panel = this.Controls.OfType<AddonCart>().Cast<Control>()
                 .Concat(this.Controls.OfType<Panel>().Where(p => p.BackColor == Color.LightGray));
             foreach (var c in panel.ToList())
             {
@@ -137,7 +137,7 @@ namespace OrderingSystem.KioskApp.Card
             int y = baseHeight + 32;
             foreach (var addon in dish.AddsOnPurchase)
             {
-                AddsCart cart = new AddsCart(addon);
+                AddonCart cart = new AddonCart(addon);
                 cart.RemoveAddson += (ss, ee) =>
                 {
                     dish.AddsOnPurchase.Remove(addon);
@@ -145,19 +145,19 @@ namespace OrderingSystem.KioskApp.Card
                 };
                 cart.AddQty += (sss, eee) =>
                 {
-                    var ad = ((AddsCart)sss).Addon;
+                    var ad = ((AddonCart)sss).Addon;
                     var a = dish.AddsOnPurchase.Find(z => z.Addon_id == ad.Addon_id);
                     if (a != null && a.Purchase_Qty < a.CurrentlyMaxOrder)
                     {
                         a.Purchase_Qty++;
                         a.CurrentlyMaxOrder--;
-                        ((AddsCart)sss).updateText();
+                        ((AddonCart)sss).updateText();
                         displayShit();
                     }
                 };
                 cart.ReduceQty += (ssss, eeee) =>
                 {
-                    var ad = ((AddsCart)ssss).Addon;
+                    var ad = ((AddonCart)ssss).Addon;
                     var a = dish.AddsOnPurchase.Find(z => z.Addon_id == ad.Addon_id);
                     if (a != null)
                     {
@@ -169,7 +169,7 @@ namespace OrderingSystem.KioskApp.Card
                         else
                         {
                             a.CurrentlyMaxOrder++;
-                            ((AddsCart)ssss).updateText();
+                            ((AddonCart)ssss).updateText();
                         }
                         displayShit();
                     }
@@ -186,7 +186,7 @@ namespace OrderingSystem.KioskApp.Card
             totallbl.Top = addlbl.Bottom + 5;
             addtotal.Text = d.AddsOnPurchase.Sum(b => b.Purchase_Qty * b.MenuPrice).ToString("N2");
             pp.Location = new Point(pp.Location.X, total.Bottom + 5);
-            this.Height = this.Controls.OfType<AddsCart>().LastOrDefault()?.Bottom + 10 ?? baseHeight;
+            this.Height = this.Controls.OfType<AddonCart>().LastOrDefault()?.Bottom + 10 ?? baseHeight;
         }
         private void dropdownClicked(object sender, EventArgs e)
         {
@@ -300,16 +300,6 @@ namespace OrderingSystem.KioskApp.Card
                 }
             }
 
-        }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-            CustomizedFrm x = CustomizedFrm.CustomizedFrmFactory(menu, cartList);
-            DialogResult rs = x.ShowDialog(this);
-            if (rs == DialogResult.OK)
-            {
-                x.Hide();
-            }
         }
     }
 
