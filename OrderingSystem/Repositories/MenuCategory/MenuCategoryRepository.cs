@@ -18,8 +18,9 @@ namespace OrderingSystem.Repositories.Categories
 
                 var conn = await db.GetConnection();
                 string query = @"
-                                SELECT DISTINCT dc.dishes_category_id, dc.* FROM dishes_category dc
-                                INNER JOIN dishes d ON dc.dishes_category_id = d.category_id
+                                SELECT DISTINCT d.category_id, c.* FROM category c
+                                INNER JOIN dishes d ON c.category_id = d.category_id 
+                                WHERE category_type = 'Dishes'
                                 ";
                 var cmd = new MySqlCommand(query, conn);
 
@@ -29,8 +30,8 @@ namespace OrderingSystem.Repositories.Categories
                     while (await reader.ReadAsync())
                     {
                         Category cz = Category.Builder()
-                       .SetCategoryID(reader.GetInt32("dishes_category_id"))
-                       .SetCategoryName(reader.GetString("dishes_category_name"))
+                        .SetCategoryID(reader.GetInt32("category_id"))
+                       .SetCategoryName(reader.GetString("category_name"))
                        .SetCategoryType("Dish_Category")
                        .Build();
                         categories.Add(cz);

@@ -17,7 +17,7 @@ namespace OrderingSystem.Repositories.Ingredients
             {
                 var conn = await db.GetConnection();
                 string query = @"
-                                SELECT DISTINCT i.ingredient_id, i.ingredient_name FROM ingredients i
+                                SELECT DISTINCT i.ingredient_id, i.ingredient_name, di.quantity FROM ingredients i
                                 INNER JOIN dishes_ingredient di ON di.ingredient_id = i.ingredient_id
                                 WHERE di.dishes_id = @id AND LOWER(i.removable) = 'yes';
                                 ";
@@ -29,6 +29,7 @@ namespace OrderingSystem.Repositories.Ingredients
                 {
                     ingredients.Add(Ingredient.Builder()
                         .SetIngredientID(reader.GetInt32("ingredient_id"))
+                        .SetQuantity(reader.GetInt32("quantity"))
                         .SetIngredientName(reader.GetString("ingredient_name"))
                         .Build());
                 }

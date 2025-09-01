@@ -104,11 +104,6 @@ namespace OrderingSystem.Model
                 return this;
             }
 
-            //public DishBuilder SetAddIngredient(Ingredient ingredient)
-            //{
-            //    this.menu.ingredientList.Add(ingredient);
-            //    return this;
-            //}
 
             public Dish Build()
             {

@@ -88,6 +88,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\MyDatabase.cs" />
+    <Compile Include="KioskApp\Beverage\BeverageFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Beverage\BeverageFrm.Designer.cs">
+      <DependentUpon>BeverageFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KioskApp\Dessert\DesertFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Dessert\DesertFrm.Designer.cs">
+      <DependentUpon>DesertFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="KioskApp\Features\CouponFrm.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -101,6 +113,7 @@
       <DependentUpon>AddonFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuBuilder\MenuBuilderFactory.cs" />
+    <Compile Include="Model\BeverageDesserts.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Coupon.cs" />
     <Compile Include="Model\Order.cs" />
@@ -156,6 +169,8 @@
     <Compile Include="KioskApp\Combos\ComboFrm.Designer.cs">
       <DependentUpon>ComboFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\BeverageDesserts\BeverageDessertRepository.cs" />
+    <Compile Include="Repositories\BeverageDesserts\IBeverageDessertRepository.cs" />
     <Compile Include="Repositories\Ingredients\IIngredientRepository.cs" />
     <Compile Include="Repositories\Ingredients\IngredientRepository.cs" />
     <Compile Include="Repositories\Kiosk\IKioskRepository.cs" />
@@ -213,6 +228,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KioskApp\AddsOn\CustomizedFrm.resx">
       <DependentUpon>CustomizedFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Beverage\BeverageFrm.resx">
+      <DependentUpon>BeverageFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Dessert\DesertFrm.resx">
+      <DependentUpon>DesertFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KioskApp\Card\AddonCard.resx">
       <DependentUpon>AddonCard.cs</DependentUpon>

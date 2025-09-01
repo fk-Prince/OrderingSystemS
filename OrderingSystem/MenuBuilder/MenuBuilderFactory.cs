@@ -70,6 +70,18 @@ namespace OrderingSystem.KioskApp.MenuBuilder
                         .SetPurchaseQty(qty)
                         .SetAddsOnMaxOrder(a.CurrentlyMaxOrder)
                         .Build();
+                case BeverageDesserts b:
+                    return BeverageDesserts.Builder()
+                        .SetMenuType(b.MenuType)
+                        .SetMenuId(b.MenuID)
+                        .SetPurchaseQuantity(qty)
+                        .SetEstimatedTime(b.Estimated_time)
+                        .SetCurrentlyMaxOrder(b.CurrentlyMaxOrder)
+                        .SetMenuName(b.MenuName)
+                        .SetPrice(b.MenuPrice)
+                        .SetBDID(b.Bd_id)
+                        .SetImage(b.Image)
+                        .Build();
                 default:
                     return null;
             }

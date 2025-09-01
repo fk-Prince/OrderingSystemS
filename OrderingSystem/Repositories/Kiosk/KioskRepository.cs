@@ -72,6 +72,8 @@ namespace OrderingSystem.Repositories.Kiosk
                         cmd.CommandText = "z_MaxOrderCombo";
                     else if (menu.MenuType.ToLower() == "addon")
                         cmd.CommandText = "z_MaxOrderAddon";
+                    else if (menu.MenuType.ToLower() == "beverage" || menu.MenuType.ToLower() == "dessert")
+                        cmd.CommandText = "z_MaxOrderBD";
                     cmd.CommandType = CommandType.StoredProcedure;
                     string json = JsonConvert.SerializeObject(cartList);
 

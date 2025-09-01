@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using OrderingSystem.KioskApp.Appetizers;
+using OrderingSystem.KioskApp.Beverage;
+using OrderingSystem.KioskApp.BeverageDessert;
 using OrderingSystem.KioskApp.Card;
 using OrderingSystem.KioskApp.Combos;
 using OrderingSystem.KioskApp.Main;
@@ -70,7 +72,14 @@ namespace OrderingSystem.KioskApp
             lastClcked.ForeColor = Color.FromArgb(94, 148, 255);
         }
 
-
+        private void DessertClicked(object sender, EventArgs e)
+        {
+            LoadForm(DesertFrm.DesertFactory(this, cartList, panels));
+        }
+        private void BeverageClicked(object sender, EventArgs e)
+        {
+            LoadForm(BeverageFrm.BeverageFactory(this, cartList, panels));
+        }
         public static KioskLayout KioskLayoutFactory(int i)
         {
             return new KioskLayout(1);
@@ -117,7 +126,7 @@ namespace OrderingSystem.KioskApp
                 existingMenu = cartList.FirstOrDefault(p =>
                     p.MenuType == items.MenuType &&
                     p.MenuID == items.MenuID &&
-                  (p is Model.Dish || p is Model.Combo || p is Appetizer)
+                  (p is Model.Dish || p is Model.Combo || p is Appetizer || p is BeverageDesserts)
                 );
 
             }
@@ -149,7 +158,8 @@ namespace OrderingSystem.KioskApp
                     }
                     else if (cartItem.Item.MenuType == existingMenu.MenuType &&
                              cartItem.Item.MenuID == existingMenu.MenuID &&
-                            (cartItem.Item is Dish || cartItem.Item is Combo || cartItem.Item is Appetizer || cartItem.Item is Addon))
+                            (cartItem.Item is Dish || cartItem.Item is Combo ||
+                            cartItem.Item is Appetizer || cartItem.Item is Addon || cartItem.Item is BeverageDesserts))
                     {
                         existingMenu.Purchase_Qty += items.Purchase_Qty;
                         cartItem.updateQuantity(existingMenu.Purchase_Qty);
@@ -172,11 +182,6 @@ namespace OrderingSystem.KioskApp
                     {
                         if (c.Menu.MenuID == cItem.MenuID)
                         {
-                            //int purchasedQty = cartList
-                            //    .Where(i => i.MenuID == cItem.MenuID)
-                            //    .Sum(i => i.Purchase_Qty);
-
-                            //int maxAvailable = control.Item.CurrentlyMaxOrder - purchasedQty;
                             await c.UpdateMaxOrder();
                         }
                     }
@@ -425,6 +430,8 @@ namespace OrderingSystem.KioskApp
         {
 
         }
+
+
     }
 
     public class ClickOutsideRemover : IMessageFilter

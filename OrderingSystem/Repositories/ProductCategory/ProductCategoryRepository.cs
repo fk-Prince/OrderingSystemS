@@ -16,14 +16,14 @@ namespace OrderingSystem.Repositories.Categories
             try
             {
                 var conn = await db.GetConnection();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM product_category", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM category WHERE category_type = 'Product' ", conn);
                 MySqlDataReader reader = await cmd.ExecuteReaderAsync();
 
                 while (await reader.ReadAsync())
                 {
                     Category cz = Category.Builder()
-                        .SetCategoryID(reader.GetInt32("product_category_id"))
-                        .SetCategoryName(reader.GetString("product_category_name"))
+                        .SetCategoryID(reader.GetInt32("category_id"))
+                        .SetCategoryName(reader.GetString("category_name"))
                         .SetCategoryType("Product_Category")
                         .Build();
                     a.Add(cz);
