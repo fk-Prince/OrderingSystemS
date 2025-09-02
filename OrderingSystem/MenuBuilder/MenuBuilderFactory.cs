@@ -74,12 +74,9 @@ namespace OrderingSystem.KioskApp.MenuBuilder
                     return BeverageDesserts.Builder()
                         .SetMenuType(b.MenuType)
                         .SetMenuId(b.MenuID)
-                        .SetPurchaseQuantity(qty)
                         .SetEstimatedTime(b.Estimated_time)
-                        .SetCurrentlyMaxOrder(b.CurrentlyMaxOrder)
                         .SetMenuName(b.MenuName)
-                        .SetPrice(b.MenuPrice)
-                        .SetBDID(b.Bd_id)
+                        .SetVariantPurchase(variant)
                         .SetImage(b.Image)
                         .Build();
                 default:

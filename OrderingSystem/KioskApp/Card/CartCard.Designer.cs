@@ -229,7 +229,7 @@
             // 
             this.addlbl.AutoSize = true;
             this.addlbl.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.addlbl.Location = new System.Drawing.Point(8, 125);
+           this.addlbl.Location = new System.Drawing.Point(8, 125);
             this.addlbl.Name = "addlbl";
             this.addlbl.Size = new System.Drawing.Size(62, 19);
             this.addlbl.TabIndex = 17;

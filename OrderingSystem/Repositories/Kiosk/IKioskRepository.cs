@@ -12,7 +12,7 @@ namespace OrderingSystem.Repositories.Kiosk
 
         Task<int> getMaxOrderAddon(List<Menu> cartList, int id);
 
-
+        Task<int> getMaxOrderBeverageDessert(List<Menu> cartList, int id);
         Task ConfirmOrder(Order order);
 
 

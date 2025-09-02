@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using Newtonsoft.Json;
 using OrderingSystem.KioskApp.Appetizers;
 using OrderingSystem.KioskApp.Beverage;
 using OrderingSystem.KioskApp.BeverageDessert;
@@ -94,7 +95,7 @@ namespace OrderingSystem.KioskApp
                 {
                     await menuCard.updateMaxOrder();
                 }
-                else if (panel is ProductCard productCard)
+                else if (panel is VariantCard productCard)
                 {
                     await productCard.UpdateMaxOrder();
                 }
@@ -109,7 +110,16 @@ namespace OrderingSystem.KioskApp
                         (p is Product pr) &&
                         pr.MenuType == newProd.MenuType &&
                         pr.MenuID == newProd.MenuID &&
-                        pr.VariantPurchased?.Product_Variant_id == newProd.VariantPurchased?.Product_Variant_id
+                        pr.VariantPurchased?.VariantID == newProd.VariantPurchased?.VariantID
+                    );
+            }
+            else if (items is BeverageDesserts bba)
+            {
+                existingMenu = cartList.FirstOrDefault(p =>
+                        (p is BeverageDesserts pr) &&
+                        pr.MenuType == bba.MenuType &&
+                        pr.MenuID == bba.MenuID &&
+                        pr.VariantPurchased?.VariantID == bba.VariantPurchased?.VariantID
                     );
             }
             else if (items is Addon newAdd)
@@ -142,16 +152,27 @@ namespace OrderingSystem.KioskApp
                         if (
                             existingProduct.MenuType == newProduct.MenuType &&
                             existingProduct.MenuID == newProduct.MenuID &&
-                            existingProduct.VariantPurchased?.Product_Variant_id == newProduct.VariantPurchased?.Product_Variant_id)
+                            existingProduct.VariantPurchased?.VariantID == newProduct.VariantPurchased?.VariantID)
                         {
                             xd.VariantPurchased.Purchase_Qty += newProduct.VariantPurchased.Purchase_Qty;
-                            //existingProduct.VariantPurchased.Purchase_Qty += newProduct.VariantPurchased.Purchase_Qty;
                             cartItem.updateQuantity(xd.VariantPurchased.Purchase_Qty);
                             break;
                         }
                     }
+                    else if (cartItem.Item is BeverageDesserts bb && items is BeverageDesserts aa && existingMenu is BeverageDesserts xx)
+                    {
+                        if (
+                            bb.MenuType == aa.MenuType &&
+                            bb.MenuID == aa.MenuID &&
+                            bb.VariantPurchased?.VariantID == aa.VariantPurchased?.VariantID)
+                        {
+                            xx.VariantPurchased.Purchase_Qty += aa.VariantPurchased.Purchase_Qty;
+                            cartItem.updateQuantity(xx.VariantPurchased.Purchase_Qty);
+                            break;
+                        }
+                    }
                     else if (existingMenu is Addon a && cartItem.Item.MenuID == a.Addon_id &&
-                            cartItem.Item.MenuType == existingMenu.MenuType)
+                        cartItem.Item.MenuType == existingMenu.MenuType)
                     {
                         existingMenu.Purchase_Qty += items.Purchase_Qty;
                         cartItem.updateQuantity(existingMenu.Purchase_Qty);
@@ -178,7 +199,7 @@ namespace OrderingSystem.KioskApp
                 cart.QuantityChanged += async (s, e) =>
                 {
                     var cItem = ((CartCard)s).Item;
-                    foreach (ProductCard c in flowCart.Controls.OfType<ProductCard>())
+                    foreach (VariantCard c in flowCart.Controls.OfType<VariantCard>())
                     {
                         if (c.Menu.MenuID == cItem.MenuID)
                         {
@@ -204,11 +225,14 @@ namespace OrderingSystem.KioskApp
                         {
                             await menuCard.updateMaxOrder();
                         }
-                        else if (panel is ProductCard productCard)
+                        else if (panel is VariantCard productCard)
                         {
                             if (items is Product p)
                             {
-
+                                await productCard.UpdateMaxOrder();
+                            }
+                            else if (items is BeverageDesserts b)
+                            {
                                 await productCard.UpdateMaxOrder();
                             }
                         }
@@ -237,6 +261,8 @@ namespace OrderingSystem.KioskApp
             {
                 if (e is Product p && p.VariantPurchased != null)
                     return p.VariantPurchased.Purchase_Qty * p.VariantPurchased.Variant_price;
+                else if (e is BeverageDesserts px && px.VariantPurchased != null)
+                    return px.VariantPurchased.Purchase_Qty * px.VariantPurchased.Variant_price;
                 else if (e is Dish d)
                 {
                     double addstotal = 0;
@@ -335,19 +361,19 @@ namespace OrderingSystem.KioskApp
         private void ReviewOrderB(object sender, EventArgs e)
         {
             //DO HANDLE REVIEW ORDER
-            //string json = JsonConvert.SerializeObject(cartList);
-            //Console.WriteLine(json);
+            string json = JsonConvert.SerializeObject(cartList);
+            Console.WriteLine(json);
             IKioskRepository k = new KioskRepository();
-            if (selectedCoupon == null)
-            {
-                Order o = new Order(cartList, null);
-                k.ConfirmOrder(o);
-            }
-            else
-            {
-                Order o = new Order(cartList, selectedCoupon.Coupon_code);
-                k.ConfirmOrder(o);
-            }
+            //if (selectedCoupon == null)
+            //{
+            //    Order o = new Order(cartList, null);
+            //    k.ConfirmOrder(o);
+            //}
+            //else
+            //{
+            //    Order o = new Order(cartList, selectedCoupon.Coupon_code);
+            //    k.ConfirmOrder(o);
+            //}
         }
 
         private void changePrimary(object sender)

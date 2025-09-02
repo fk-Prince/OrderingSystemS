@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
 using OrderingSystem.Database;
+using OrderingSystem.Model;
 
 namespace OrderingSystem.Repositories.BeverageDesserts
 {
@@ -22,15 +23,28 @@ namespace OrderingSystem.Repositories.BeverageDesserts
                 MySqlDataReader reader = await cmd.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {
+                    string v = reader.GetString("pvid_name_stock_price");
+                    List<Variant> vList = new List<Variant>();
+
+                    string[] outerParts = v.Split(',');
+                    foreach (string texts in outerParts)
+                    {
+                        string[] parts = texts.Trim().Split('|');
+                        vList.Add(
+                            Variant.Builder()
+                            .SetVaraintId(int.Parse(parts[0].Trim()))
+                            .SetVaraintName(parts[1].Trim())
+                            .SetVaraintPrice(double.Parse(parts[3].Trim()))
+                            .SetCurrentlyMaxOrder(int.Parse(parts[2].Trim()))
+                            .Build()
+                        );
+                    }
                     Model.BeverageDesserts bd = Model.BeverageDesserts.Builder()
                         .SetMenuId(reader.GetInt32("menu_id"))
                         .SetMenuName(reader.GetString("menu_name"))
                         .SetDescription(reader.GetString("menu_description"))
-                        .SetPrice(reader.GetDouble("price"))
                         .SetEstimatedTime(reader.GetTimeSpan("estimated_time"))
-                        .SetCurrentlyMaxOrder(reader.GetInt32("max_order"))
-                        .SetPurchaseQuantity(0)
-                        .SetBDID(reader.GetInt32("beverage_dessert_id"))
+                        .SetVariant(vList)
                         .SetMenuType(reader.GetString("menu_type"))
                         .Build();
                     list.Add(bd);
@@ -61,15 +75,27 @@ namespace OrderingSystem.Repositories.BeverageDesserts
                 MySqlDataReader reader = await cmd.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {
+                    string v = reader.GetString("pvid_name_stock_price");
+                    List<Variant> vList = new List<Variant>();
+                    string[] outerParts = v.Split(',');
+                    foreach (string texts in outerParts)
+                    {
+                        string[] parts = texts.Trim().Split('|');
+                        vList.Add(
+                            Variant.Builder()
+                            .SetVaraintId(int.Parse(parts[0].Trim()))
+                            .SetVaraintName(parts[1].Trim())
+                            .SetVaraintPrice(double.Parse(parts[3].Trim()))
+                            .SetCurrentlyMaxOrder(int.Parse(parts[2].Trim()))
+                            .Build()
+                        );
+                    }
                     Model.BeverageDesserts bd = Model.BeverageDesserts.Builder()
-                        .SetMenuId(reader.GetInt32("menu_id"))
+                        .SetMenuId(reader.GetInt32("other_menu_id"))
                         .SetMenuName(reader.GetString("menu_name"))
                         .SetDescription(reader.GetString("menu_description"))
-                        .SetPrice(reader.GetDouble("price"))
                         .SetEstimatedTime(reader.GetTimeSpan("estimated_time"))
-                        .SetCurrentlyMaxOrder(reader.GetInt32("max_order"))
-                        .SetPurchaseQuantity(0)
-                        .SetBDID(reader.GetInt32("beverage_dessert_id"))
+                        .SetVariant(vList)
                         .SetMenuType(reader.GetString("menu_type"))
                         .Build();
                     list.Add(bd);

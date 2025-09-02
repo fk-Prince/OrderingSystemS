@@ -192,5 +192,48 @@ namespace OrderingSystem.Repositories.Kiosk
                 await db.CloseConnection();
             }
         }
+
+        public async Task<int> getMaxOrderBeverageDessert(List<Menu> cartList, int id)
+        {
+            var db = MyDatabase.getInstance();
+            int maxOrder = 0;
+
+            try
+            {
+                var conn = await db.GetConnection();
+                using (var cmd = new MySqlCommand("Z_MaxOrderBD", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    string json = JsonConvert.SerializeObject(cartList);
+                    Console.WriteLine(json);
+                    cmd.Parameters.AddWithValue("p_cart_json", json);
+                    cmd.Parameters.AddWithValue("p_target_menu_id", id);
+
+
+                    using (MySqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (reader.HasRows)
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                maxOrder = reader.GetInt32("max_order");
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw new Exception("Error calculatong the maxorder");
+            }
+            finally
+            {
+                await db.CloseConnection();
+            }
+
+            return maxOrder;
+        }
     }
 }

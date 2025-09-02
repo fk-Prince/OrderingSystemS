@@ -124,7 +124,7 @@ namespace OrderingSystem.KioskApp.Products
             flowPanel.Controls.Clear();
             foreach (Product pr in products)
             {
-                ProductCard p = new ProductCard(pr, itemSelected, cartList);
+                VariantCard p = new VariantCard(pr, itemSelected, cartList);
                 p.Margin = new Padding(10, 30, 10, 30);
                 panels.Add(p);
                 flowPanel.Controls.Add(p);
@@ -138,7 +138,7 @@ namespace OrderingSystem.KioskApp.Products
             int id = (int)lastButton.Tag;
             foreach (Control c in flowPanel.Controls)
             {
-                if (c is ProductCard card)
+                if (c is VariantCard card)
                 {
                     Product product = (Product)card.Menu;
                     c.Visible = ((id == 0 || product.Category_id == id) && (string.IsNullOrWhiteSpace(tx) || product.MenuName.ToLower().Contains(tx)));

@@ -9,7 +9,7 @@ using Menu = OrderingSystem.Model.Menu;
 
 namespace OrderingSystem.KioskApp.Card
 {
-    public partial class ProductCard : Guna2Panel
+    public partial class VariantCard : Guna2Panel
     {
         private Menu menu;
         private IMenuSelected itemSelected;
@@ -17,18 +17,19 @@ namespace OrderingSystem.KioskApp.Card
         private List<Menu> cartList;
 
         public Menu Menu => menu;
-        public ProductCard(Menu menu, IMenuSelected itemSelected, List<Menu> cartList)
+        public VariantCard(Menu menu, IMenuSelected itemSelected, List<Menu> cartList)
         {
             InitializeComponent();
             this.menu = menu;
             kioskRepository = new KioskRepository();
             this.cartList = cartList;
             this.itemSelected = itemSelected;
-
+            this.HandleCreated += async (s, e) => await UpdateMaxOrder();
 
             cardLayout();
             displayProduct();
             setMaxOrder();
+
         }
 
         private void displayProduct()
@@ -41,7 +42,6 @@ namespace OrderingSystem.KioskApp.Card
                 foreach (Variant v in p.VariantList)
                 {
                     vList.Items.Add(v.Variant_name.Substring(0, 1).ToUpper() + v.Variant_name.Substring(1).ToLower());
-                    //await UpdateMaxOrder(v.CurrentlyMaxOrder);
                 }
 
                 if (p.VariantList.Count > 0)
@@ -52,6 +52,33 @@ namespace OrderingSystem.KioskApp.Card
 
 
                 if (p.VariantList[0].CurrentlyMaxOrder <= 0)
+                {
+                    quantity.Minimum = 0;
+                    quantity.Enabled = false;
+                    outStock.Visible = true;
+                }
+                else
+                {
+                    outStock.Visible = false;
+                    quantity.Minimum = 1;
+                    quantity.Enabled = true;
+                }
+            }
+            if (menu is BeverageDesserts b)
+            {
+                foreach (Variant v in b.VariantList)
+                {
+                    vList.Items.Add(v.Variant_name.Substring(0, 1).ToUpper() + v.Variant_name.Substring(1).ToLower());
+                }
+
+                if (b.VariantList.Count > 0)
+                {
+                    vList.SelectedIndex = 0;
+                    price.Text = b.VariantList[0].Variant_price.ToString("N2");
+                }
+
+
+                if (b.VariantList[0].CurrentlyMaxOrder <= 0)
                 {
                     quantity.Minimum = 0;
                     quantity.Enabled = false;
@@ -81,6 +108,11 @@ namespace OrderingSystem.KioskApp.Card
             if (menu is Product p)
             {
                 x = p.VariantList[vList.SelectedIndex].CurrentlyMaxOrder;
+
+            }
+            else if (menu is BeverageDesserts b)
+            {
+                x = b.VariantList[vList.SelectedIndex].CurrentlyMaxOrder;
             }
         }
 
@@ -88,24 +120,50 @@ namespace OrderingSystem.KioskApp.Card
         {
             if (vList.SelectedIndex == -1) return;
 
+            int max = 0;
+
 
             if (menu is Product p)
             {
-                int max = await kioskRepository.getMaxOrderProduct(cartList, p.VariantList[vList.SelectedIndex].Product_Variant_id);
-                quantity.Maximum = max;
-                if (max <= 0)
-                {
-                    quantity.Minimum = 0;
-                    quantity.Enabled = false;
-                    outStock.Visible = true;
-                }
-                else
-                {
-                    outStock.Visible = false;
-                    quantity.Minimum = 1;
-                    quantity.Enabled = true;
-                }
+                max = await kioskRepository.getMaxOrderProduct(cartList, p.VariantList[vList.SelectedIndex].VariantID);
             }
+            else if (menu is BeverageDesserts bd)
+            {
+                max = await kioskRepository.getMaxOrderBeverageDessert(cartList, bd.VariantList[vList.SelectedIndex].VariantID);
+
+            }
+            //if (max <= 0)
+            //{
+            //    quantity.Minimum = 0;
+            //    quantity.Enabled = false;
+            //    outStock.Visible = true;
+            //}
+            //else
+            //{
+            //    outStock.Visible = false;
+            //    quantity.Minimum = 1;
+            //    quantity.Enabled = true;
+            //}
+
+            if (max <= 0)
+            {
+                quantity.Minimum = 0;
+                quantity.Value = 0;
+                quantity.Enabled = false;
+                outStock.Visible = true;
+                guna2PictureBox2.Enabled = false;
+            }
+            else
+            {
+                guna2PictureBox2.Enabled = true;
+                outStock.Visible = false;
+                quantity.Minimum = 1;
+                if (quantity.Value < 1 || quantity.Value > max)
+                    quantity.Value = 1;
+                outStock.Refresh();
+                quantity.Enabled = true;
+            }
+            quantity.Maximum = max;
 
         }
 
@@ -116,13 +174,12 @@ namespace OrderingSystem.KioskApp.Card
 
             if (menu is Product p)
             {
-                //int noPurchase = cartList
-                //    .Where(i => i is Product cp &&
-                //                cp.MenuID == p.MenuID &&
-                //                cp.Variant?.MenuID == p.VariantList[index].MenuID)
-                //    .Sum(i => i.Purchase_Qty);
-
                 price.Text = p.VariantList[index].Variant_price.ToString("N2");
+                await UpdateMaxOrder();
+            }
+            else if (menu is BeverageDesserts b)
+            {
+                price.Text = b.VariantList[index].Variant_price.ToString("N2");
                 await UpdateMaxOrder();
             }
         }
@@ -132,12 +189,6 @@ namespace OrderingSystem.KioskApp.Card
             if (vList.SelectedIndex < 0) return;
             int qty = (int)quantity.Value;
             if (qty <= 0) return;
-
-            //int totalPurchasedQty = cartList
-            //            .Where(e => e is Product p && p.Variant != null && p.Variant.MenuID == ((Product)menu).VariantList[vList.SelectedIndex].MenuID)
-            //            .Sum(e => e.Purchase_Qty);
-            //int newQtyMax = ((Product)menu).VariantList[vList.SelectedIndex].CurrentlyMaxOrder - totalPurchasedQty - qty;
-            //quantity.Maximum = newQtyMax;
 
             if (menu is Product x)
             {
@@ -150,12 +201,19 @@ namespace OrderingSystem.KioskApp.Card
                 Product p = (Product)MenuBuilderFactory.PurchaseBuild(x, qty, x.VariantList[vList.SelectedIndex]);
                 itemSelected.SelectedItem(this, p);
             }
+            else if (menu is BeverageDesserts ba)
+            {
+                if (qty > quantity.Maximum)
+                {
+                    qty = (int)quantity.Value;
+                }
+                ba.VariantList[vList.SelectedIndex].Purchase_Qty = qty;
+                BeverageDesserts p = (BeverageDesserts)MenuBuilderFactory.PurchaseBuild(ba, qty, ba.VariantList[vList.SelectedIndex]);
+                itemSelected.SelectedItem(this, p);
+            }
             await UpdateMaxOrder();
         }
 
-        private void image_Click(object sender, System.EventArgs e)
-        {
 
-        }
     }
 }

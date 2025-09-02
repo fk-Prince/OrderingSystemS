@@ -1,6 +1,6 @@
 ﻿namespace OrderingSystem.KioskApp.Card
 {
-    partial class ProductCard
+    partial class VariantCard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductCard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VariantCard));
             this.quantity = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.price = new System.Windows.Forms.Label();

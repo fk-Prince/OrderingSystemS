@@ -89,7 +89,6 @@ namespace OrderingSystem.KioskApp.Card
                 CustomizedFrm x = CustomizedFrm.CustomizedFrmFactory(d, cartList);
                 x.purchaseQuantityChanged += (xe, xr) => displayShit();
                 DialogResult rs = x.ShowDialog(this);
-
             }
         }
         private void displayShit()
@@ -220,6 +219,14 @@ namespace OrderingSystem.KioskApp.Card
                 ItemType.Text = p.VariantPurchased.Variant_name;
                 total.Text = (p.VariantPurchased.Variant_price * p.VariantPurchased.Purchase_Qty).ToString("N2");
             }
+            else if (menu is BeverageDesserts x)
+            {
+                qty.Text = x.VariantPurchased.Purchase_Qty.ToString();
+                tqty.Text = x.VariantPurchased.Purchase_Qty.ToString();
+                price.Text = x.VariantPurchased.Variant_price.ToString("N2");
+                ItemType.Text = x.VariantPurchased.Variant_name;
+                total.Text = (x.VariantPurchased.Variant_price * x.VariantPurchased.Purchase_Qty).ToString("N2");
+            }
             else
             {
                 qty.Text = menu.Purchase_Qty.ToString();
@@ -292,7 +299,7 @@ namespace OrderingSystem.KioskApp.Card
 
                 await menuCard.updateMaxOrder();
             }
-            else if (parentPanel is ProductCard pCard)
+            else if (parentPanel is VariantCard pCard)
             {
                 if (menu is Product p && p.VariantPurchased != null)
                 {

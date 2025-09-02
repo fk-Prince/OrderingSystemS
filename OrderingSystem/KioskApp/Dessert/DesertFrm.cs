@@ -34,7 +34,7 @@ namespace OrderingSystem.KioskApp.BeverageDessert
             flowPanel.Controls.Clear();
             foreach (BeverageDesserts m in menus)
             {
-                MenuCard p = MenuCard.MenuCardFactory(m, itemSelected, cartList);
+                VariantCard p = new VariantCard(m, itemSelected, cartList);
                 panels.Add(p);
                 p.Margin = new Padding(10, 10, 10, 10);
                 p.Tag = m.Category_id;

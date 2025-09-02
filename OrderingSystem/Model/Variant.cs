@@ -9,7 +9,7 @@
         private int purchaseQuantity;
         private int currentlyMaxOrder;
 
-        public int Product_Variant_id { get => product_variant_id; set => product_variant_id = value; }
+        public int VariantID { get => product_variant_id; set => product_variant_id = value; }
         public string Variant_name { get => variant_name; set => variant_name = value; }
         public int Variant_stock { get => variant_stock; set => variant_stock = value; }
         public double Variant_price { get => variant_price; set => variant_price = value; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace OrderingSystem.Model
@@ -6,10 +7,14 @@ namespace OrderingSystem.Model
     public class BeverageDesserts : Menu
     {
         private int bd_id;
-        private Variant variant;
+        private List<Variant> variant;
+        private Variant variant_purchase;
         private BeverageDesserts() { }
 
         public int Bd_id { get => bd_id; set => bd_id = value; }
+        public List<Variant> VariantList { get => variant; set => variant = value; }
+        public Variant VariantPurchased { get => variant_purchase; }
+
         public static BeverageDessertBuilder Builder() => new BeverageDessertBuilder();
 
         public override Menu Clone()
@@ -21,6 +26,9 @@ namespace OrderingSystem.Model
                 menu_name = menu_name,
                 price = price,
                 image = image,
+                variant = variant,
+                variant_purchase = variant_purchase?.Clone(),
+                bd_id = bd_id,
                 menu_description = menu_description,
                 currentlyMaxOrder = currentlyMaxOrder,
                 category_id = category_id,
@@ -42,7 +50,16 @@ namespace OrderingSystem.Model
                 this.menu.purchaseQty = pQty;
                 return this;
             }
-
+            public BeverageDessertBuilder SetVariantPurchase(Variant variant)
+            {
+                this.menu.variant_purchase = variant;
+                return this;
+            }
+            public BeverageDessertBuilder SetVariant(List<Variant> variant)
+            {
+                this.menu.variant = variant;
+                return this;
+            }
 
             public BeverageDessertBuilder SetEstimatedTime(TimeSpan time)
             {
