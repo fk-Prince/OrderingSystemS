@@ -10,7 +10,7 @@ namespace OrderingSystem.Database
     {
         private static MyDatabase instance;
         private static readonly object lockObject = new object();
-        private static readonly string driver = "server=localhost;user=root;pwd=root;database=smh;AllowUserVariables=true";
+        private static readonly string driver = "server=localhost;user=root;pwd=root;database=ordering_system_final;AllowUserVariables=true";
         private MySqlConnection conn;
         private SemaphoreSlim connectionSemaphore = new SemaphoreSlim(1, 1);
         private MyDatabase()

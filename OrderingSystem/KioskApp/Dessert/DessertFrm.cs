@@ -7,32 +7,30 @@ using Menu = OrderingSystem.Model.Menu;
 
 namespace OrderingSystem.KioskApp.BeverageDessert
 {
-    public partial class DesertFrm : Form
+    public partial class DessertFrm : Form
     {
-        private static DesertFrm instance;
-        private IBeverageDessertRepository beverageDessertRepository;
+        private static DessertFrm instance;
         private IMenuSelected itemSelected;
         private List<Menu> cartList;
         private List<Panel> panels;
 
-        public DesertFrm(IBeverageDessertRepository beverageDessertRepository, IMenuSelected itemSelected, List<Menu> cartList, List<Panel> panels)
+        public DessertFrm(IDessertRepository beverageDessertRepository, IMenuSelected itemSelected, List<Menu> cartList, List<Panel> panels)
         {
             InitializeComponent();
-            this.beverageDessertRepository = beverageDessertRepository;
             this.itemSelected = itemSelected;
             this.cartList = cartList;
             this.panels = panels;
             HandleCreated += async (s, e) =>
             {
-                List<BeverageDesserts> menus = await beverageDessertRepository.GetDesert();
+                List<Dessert> menus = await beverageDessertRepository.GetDesert();
                 display(menus);
             };
         }
 
-        private void display(List<BeverageDesserts> menus)
+        private void display(List<Dessert> menus)
         {
             flowPanel.Controls.Clear();
-            foreach (BeverageDesserts m in menus)
+            foreach (Dessert m in menus)
             {
                 VariantCard p = new VariantCard(m, itemSelected, cartList);
                 panels.Add(p);
@@ -42,12 +40,12 @@ namespace OrderingSystem.KioskApp.BeverageDessert
             }
         }
 
-        public static DesertFrm DesertFactory(IMenuSelected itemSelected, List<Menu> cartList, List<Panel> panel)
+        public static DessertFrm DesertFrmFactory(IMenuSelected itemSelected, List<Menu> cartList, List<Panel> panel)
         {
             if (instance == null)
             {
-                IBeverageDessertRepository beverageDessertRepository = new BeverageDessertRepository();
-                return instance = new DesertFrm(beverageDessertRepository, itemSelected, cartList, panel);
+                IDessertRepository dessertRepository = new DessertRepository();
+                return instance = new DessertFrm(dessertRepository, itemSelected, cartList, panel);
             }
             else
             {

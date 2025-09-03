@@ -88,17 +88,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\MyDatabase.cs" />
-    <Compile Include="KioskApp\Beverage\BeverageFrm.cs">
+    <Compile Include="KioskApp\Dessert\DessertFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KioskApp\Beverage\BeverageFrm.Designer.cs">
-      <DependentUpon>BeverageFrm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="KioskApp\Dessert\DesertFrm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="KioskApp\Dessert\DesertFrm.Designer.cs">
-      <DependentUpon>DesertFrm.cs</DependentUpon>
+    <Compile Include="KioskApp\Dessert\DessertFrm.Designer.cs">
+      <DependentUpon>DessertFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="KioskApp\Features\CouponFrm.cs">
       <SubType>Component</SubType>
@@ -113,7 +107,7 @@
       <DependentUpon>AddonFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuBuilder\MenuBuilderFactory.cs" />
-    <Compile Include="Model\BeverageDesserts.cs" />
+    <Compile Include="Model\Dessert.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Coupon.cs" />
     <Compile Include="Model\Order.cs" />
@@ -169,16 +163,14 @@
     <Compile Include="KioskApp\Combos\ComboFrm.Designer.cs">
       <DependentUpon>ComboFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\BeverageDesserts\BeverageDessertRepository.cs" />
-    <Compile Include="Repositories\BeverageDesserts\IBeverageDessertRepository.cs" />
+    <Compile Include="Repositories\Dessert\DessertRepository.cs" />
+    <Compile Include="Repositories\Dessert\IDessertRepository.cs" />
     <Compile Include="Repositories\Ingredients\IIngredientRepository.cs" />
     <Compile Include="Repositories\Ingredients\IngredientRepository.cs" />
     <Compile Include="Repositories\Kiosk\IKioskRepository.cs" />
     <Compile Include="Repositories\Kiosk\KioskRepository.cs" />
-    <Compile Include="Repositories\MenuCategory\IMenuCategoryRepository.cs" />
-    <Compile Include="Repositories\ProductCategory\IProductCategoryRepository.cs" />
-    <Compile Include="Repositories\MenuCategory\MenuCategoryRepository.cs" />
-    <Compile Include="Repositories\ProductCategory\ProductCategoryRepository.cs" />
+    <Compile Include="Repositories\Category\ICategoryRepository.cs" />
+    <Compile Include="Repositories\Category\CategoryRepository.cs" />
     <Compile Include="Repositories\Combo\ComboRepository.cs" />
     <Compile Include="Repositories\Combo\IComboRepository.cs" />
     <Compile Include="Repositories\Coupon\CouponRepository.cs" />
@@ -197,28 +189,28 @@
       <DependentUpon>KioskLayout.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositories\Dishes\IDishRepository.cs" />
-    <Compile Include="KioskApp\Dishes\DishFrm.cs">
+    <Compile Include="KioskApp\Dishes\DishesFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KioskApp\Dishes\DishFrm.Designer.cs">
-      <DependentUpon>DishFrm.cs</DependentUpon>
+    <Compile Include="KioskApp\Dishes\DishesFrm.Designer.cs">
+      <DependentUpon>DishesFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositories\Dishes\DishesRepository.cs" />
-    <Compile Include="Repositories\Product\IProductRepository.cs" />
-    <Compile Include="KioskApp\Products\ProductFrm.cs">
+    <Compile Include="Repositories\Beverage\IBeverageRepository.cs" />
+    <Compile Include="KioskApp\Beverage\BeverageFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KioskApp\Products\ProductFrm.Designer.cs">
-      <DependentUpon>ProductFrm.cs</DependentUpon>
+    <Compile Include="KioskApp\Beverage\BeverageFrm.Designer.cs">
+      <DependentUpon>BeverageFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\Product\ProductRepository.cs" />
+    <Compile Include="Repositories\Beverage\BeverageRepository.cs" />
     <Compile Include="Model\Addon.cs" />
     <Compile Include="Model\Appetizer.cs" />
     <Compile Include="Model\Combo.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\Dish.cs" />
-    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Beverage.cs" />
     <Compile Include="Model\Variant.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -229,11 +221,8 @@
     <EmbeddedResource Include="KioskApp\AddsOn\CustomizedFrm.resx">
       <DependentUpon>CustomizedFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KioskApp\Beverage\BeverageFrm.resx">
-      <DependentUpon>BeverageFrm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="KioskApp\Dessert\DesertFrm.resx">
-      <DependentUpon>DesertFrm.cs</DependentUpon>
+    <EmbeddedResource Include="KioskApp\Dessert\DessertFrm.resx">
+      <DependentUpon>DessertFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KioskApp\Card\AddonCard.resx">
       <DependentUpon>AddonCard.cs</DependentUpon>
@@ -265,11 +254,11 @@
     <EmbeddedResource Include="KioskApp\Main\KioskLayout.resx">
       <DependentUpon>KioskLayout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KioskApp\Dishes\DishFrm.resx">
-      <DependentUpon>DishFrm.cs</DependentUpon>
+    <EmbeddedResource Include="KioskApp\Dishes\DishesFrm.resx">
+      <DependentUpon>DishesFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KioskApp\Products\ProductFrm.resx">
-      <DependentUpon>ProductFrm.cs</DependentUpon>
+    <EmbeddedResource Include="KioskApp\Beverage\BeverageFrm.resx">
+      <DependentUpon>BeverageFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -327,6 +316,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\osp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\desser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chesse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\combo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

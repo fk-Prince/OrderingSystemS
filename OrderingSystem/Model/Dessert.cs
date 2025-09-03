@@ -4,12 +4,12 @@ using System.Drawing;
 
 namespace OrderingSystem.Model
 {
-    public class BeverageDesserts : Menu
+    public class Dessert : Menu
     {
         private int bd_id;
         private List<Variant> variant;
         private Variant variant_purchase;
-        private BeverageDesserts() { }
+        private Dessert() { }
 
         public int Bd_id { get => bd_id; set => bd_id = value; }
         public List<Variant> VariantList { get => variant; set => variant = value; }
@@ -19,7 +19,7 @@ namespace OrderingSystem.Model
 
         public override Menu Clone()
         {
-            return new BeverageDesserts
+            return new Dessert
             {
                 menu_type = menu_type,
                 menu_id = MenuID,
@@ -39,11 +39,11 @@ namespace OrderingSystem.Model
         }
         public class BeverageDessertBuilder
         {
-            private readonly BeverageDesserts menu;
+            private readonly Dessert menu;
 
             public BeverageDessertBuilder()
             {
-                menu = new BeverageDesserts();
+                menu = new Dessert();
             }
             public BeverageDessertBuilder SetPurchaseQuantity(int pQty)
             {
@@ -115,7 +115,7 @@ namespace OrderingSystem.Model
             }
 
 
-            public BeverageDesserts Build()
+            public Dessert Build()
             {
                 return menu;
             }

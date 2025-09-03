@@ -14,45 +14,6 @@ namespace OrderingSystem.Repositories.Kiosk
     public class KioskRepository : IKioskRepository
     {
 
-        public async Task<int> getMaxOrderAddon(List<Menu> cartList, int id)
-        {
-            var db = MyDatabase.getInstance();
-            int maxOrder = 0;
-            try
-            {
-                var conn = await db.GetConnection();
-                using (var cmd = new MySqlCommand("GetMaxOrderForAddon", conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    string json = JsonConvert.SerializeObject(cartList);
-                    cmd.Parameters.AddWithValue("p_cart_json", json);
-                    cmd.Parameters.AddWithValue("p_target_adds_id", id);
-
-                    using (MySqlDataReader reader = await cmd.ExecuteReaderAsync())
-                    {
-                        if (reader.HasRows)
-                        {
-                            if (await reader.ReadAsync())
-                            {
-                                maxOrder = reader.GetInt32("max_order");
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-                throw new Exception("Error calculat the maxorder");
-            }
-            finally
-            {
-                await db.CloseConnection();
-            }
-
-            return maxOrder;
-        }
-
         public async Task<int> getMaxOrderMenu(List<Model.Menu> cartList, Menu menu)
         {
 
@@ -72,17 +33,12 @@ namespace OrderingSystem.Repositories.Kiosk
                         cmd.CommandText = "z_MaxOrderCombo";
                     else if (menu.MenuType.ToLower() == "addon")
                         cmd.CommandText = "z_MaxOrderAddon";
-                    else if (menu.MenuType.ToLower() == "beverage" || menu.MenuType.ToLower() == "dessert")
-                        cmd.CommandText = "z_MaxOrderBD";
+
                     cmd.CommandType = CommandType.StoredProcedure;
                     string json = JsonConvert.SerializeObject(cartList);
 
                     cmd.Parameters.AddWithValue("p_cart_json", json);
-                    if (menu.MenuType.ToLower() == "product")
-                    {
-                        cmd.Parameters.AddWithValue("p_target_product_id", menu.MenuID);
-                    }
-                    else if (menu.MenuType.ToLower() == "addon" && menu is Addon a)
+                    if (menu.MenuType.ToLower() == "addon" && menu is Addon a)
                     {
                         cmd.Parameters.AddWithValue("p_target_menu_id", a.Addon_id);
                     }
@@ -100,6 +56,7 @@ namespace OrderingSystem.Repositories.Kiosk
                                 maxOrder = reader.GetInt32("max_order");
 
                             }
+
                         }
                     }
                 }
@@ -118,7 +75,7 @@ namespace OrderingSystem.Repositories.Kiosk
 
         }
 
-        public async Task<int> getMaxOrderProduct(List<Menu> cartList, int productVariantID)
+        public async Task<int> getMaxOrderBeverage(List<Menu> cartList, int productVariantID)
         {
             var db = MyDatabase.getInstance();
             int maxOrder = 0;
@@ -126,7 +83,7 @@ namespace OrderingSystem.Repositories.Kiosk
             try
             {
                 var conn = await db.GetConnection();
-                using (var cmd = new MySqlCommand("Z_MaxOrderProduct", conn))
+                using (var cmd = new MySqlCommand("Z_MaxOrderBeverage", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     string json = JsonConvert.SerializeObject(cartList);
@@ -147,8 +104,9 @@ namespace OrderingSystem.Repositories.Kiosk
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 throw new Exception("Error calculatong the maxorder");
             }
             finally
@@ -166,8 +124,7 @@ namespace OrderingSystem.Repositories.Kiosk
             {
                 var conn = await db.GetConnection();
                 string json = JsonConvert.SerializeObject(order.OrderList);
-                Console.WriteLine(json);
-                using (MySqlCommand cmd = new MySqlCommand("X_MakeAnOrder", conn))
+                using (MySqlCommand cmd = new MySqlCommand("ORD_MakeOrder", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("p_order_json", json);
@@ -193,7 +150,7 @@ namespace OrderingSystem.Repositories.Kiosk
             }
         }
 
-        public async Task<int> getMaxOrderBeverageDessert(List<Menu> cartList, int id)
+        public async Task<int> getMaxOrderDessert(List<Menu> cartList, int id)
         {
             var db = MyDatabase.getInstance();
             int maxOrder = 0;
@@ -201,11 +158,10 @@ namespace OrderingSystem.Repositories.Kiosk
             try
             {
                 var conn = await db.GetConnection();
-                using (var cmd = new MySqlCommand("Z_MaxOrderBD", conn))
+                using (var cmd = new MySqlCommand("Z_MaxOrderDessert", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     string json = JsonConvert.SerializeObject(cartList);
-                    Console.WriteLine(json);
                     cmd.Parameters.AddWithValue("p_cart_json", json);
                     cmd.Parameters.AddWithValue("p_target_menu_id", id);
 

@@ -37,7 +37,7 @@ namespace OrderingSystem.KioskApp.Card
             name.Text = menu.MenuName;
             desc.Text = menu.MenuDescription;
             image.Image = menu.Image;
-            if (menu is Product p)
+            if (menu is Model.Beverage p)
             {
                 foreach (Variant v in p.VariantList)
                 {
@@ -64,7 +64,7 @@ namespace OrderingSystem.KioskApp.Card
                     quantity.Enabled = true;
                 }
             }
-            if (menu is BeverageDesserts b)
+            if (menu is Dessert b)
             {
                 foreach (Variant v in b.VariantList)
                 {
@@ -105,12 +105,12 @@ namespace OrderingSystem.KioskApp.Card
         {
             if (vList.SelectedIndex == -1) return;
             int x = 0;
-            if (menu is Product p)
+            if (menu is Model.Beverage p)
             {
                 x = p.VariantList[vList.SelectedIndex].CurrentlyMaxOrder;
 
             }
-            else if (menu is BeverageDesserts b)
+            else if (menu is Dessert b)
             {
                 x = b.VariantList[vList.SelectedIndex].CurrentlyMaxOrder;
             }
@@ -123,13 +123,13 @@ namespace OrderingSystem.KioskApp.Card
             int max = 0;
 
 
-            if (menu is Product p)
+            if (menu is Model.Beverage p)
             {
-                max = await kioskRepository.getMaxOrderProduct(cartList, p.VariantList[vList.SelectedIndex].VariantID);
+                max = await kioskRepository.getMaxOrderBeverage(cartList, p.VariantList[vList.SelectedIndex].VariantID);
             }
-            else if (menu is BeverageDesserts bd)
+            else if (menu is Dessert bd)
             {
-                max = await kioskRepository.getMaxOrderBeverageDessert(cartList, bd.VariantList[vList.SelectedIndex].VariantID);
+                max = await kioskRepository.getMaxOrderDessert(cartList, bd.VariantList[vList.SelectedIndex].VariantID);
 
             }
             //if (max <= 0)
@@ -172,12 +172,12 @@ namespace OrderingSystem.KioskApp.Card
             if (vList.SelectedIndex == -1) return;
             int index = vList.SelectedIndex;
 
-            if (menu is Product p)
+            if (menu is Model.Beverage p)
             {
                 price.Text = p.VariantList[index].Variant_price.ToString("N2");
                 await UpdateMaxOrder();
             }
-            else if (menu is BeverageDesserts b)
+            else if (menu is Dessert b)
             {
                 price.Text = b.VariantList[index].Variant_price.ToString("N2");
                 await UpdateMaxOrder();
@@ -190,7 +190,7 @@ namespace OrderingSystem.KioskApp.Card
             int qty = (int)quantity.Value;
             if (qty <= 0) return;
 
-            if (menu is Product x)
+            if (menu is Model.Beverage x)
             {
 
                 if (qty > quantity.Maximum)
@@ -198,17 +198,17 @@ namespace OrderingSystem.KioskApp.Card
                     qty = (int)quantity.Value;
                 }
                 x.VariantList[vList.SelectedIndex].Purchase_Qty = qty;
-                Product p = (Product)MenuBuilderFactory.PurchaseBuild(x, qty, x.VariantList[vList.SelectedIndex]);
+                Model.Beverage p = (Model.Beverage)MenuBuilderFactory.PurchaseBuild(x, qty, x.VariantList[vList.SelectedIndex]);
                 itemSelected.SelectedItem(this, p);
             }
-            else if (menu is BeverageDesserts ba)
+            else if (menu is Dessert ba)
             {
                 if (qty > quantity.Maximum)
                 {
                     qty = (int)quantity.Value;
                 }
                 ba.VariantList[vList.SelectedIndex].Purchase_Qty = qty;
-                BeverageDesserts p = (BeverageDesserts)MenuBuilderFactory.PurchaseBuild(ba, qty, ba.VariantList[vList.SelectedIndex]);
+                Dessert p = (Dessert)MenuBuilderFactory.PurchaseBuild(ba, qty, ba.VariantList[vList.SelectedIndex]);
                 itemSelected.SelectedItem(this, p);
             }
             await UpdateMaxOrder();

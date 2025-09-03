@@ -3,23 +3,23 @@ using System.Drawing;
 
 namespace OrderingSystem.Model
 {
-    public class Product : Menu
+    public class Beverage : Menu
     {
 
         private List<Variant> variantList;
         private Variant variantPurchased;
 
-        public Product()
+        public Beverage()
         {
             variantList = new List<Variant>();
         }
 
         public Variant VariantPurchased { get => variantPurchased; set => variantPurchased = value; }
         public List<Variant> VariantList { get => variantList; set => variantList = value; }
-        public static ProductBuilder Builder() => new ProductBuilder();
+        public static BeverageBuilder Builder() => new BeverageBuilder();
         public override Menu Clone()
         {
-            return new Product
+            return new Beverage
             {
                 menu_type = menu_type,
                 menu_id = MenuID,
@@ -33,81 +33,81 @@ namespace OrderingSystem.Model
                 category_id = category_id
             };
         }
-        public class ProductBuilder
+        public class BeverageBuilder
         {
-            private readonly Product product;
+            private readonly Beverage product;
 
-            public ProductBuilder SetProductCategoryID(int id)
+            public BeverageBuilder SetProductCategoryID(int id)
             {
                 this.product.category_id = id;
                 return this;
             }
-            public ProductBuilder SetVariantPurchase(Variant variant)
+            public BeverageBuilder SetVariantPurchase(Variant variant)
             {
                 this.product.VariantPurchased = variant;
                 return this;
             }
-            public ProductBuilder SetVariantList(List<Variant> variantList)
+            public BeverageBuilder SetVariantList(List<Variant> variantList)
             {
                 this.product.variantList = variantList;
                 return this;
             }
-            public ProductBuilder()
+            public BeverageBuilder()
             {
-                product = new Product();
+                product = new Beverage();
             }
-            public ProductBuilder SetPurchaseQuantity(int pQty)
+            public BeverageBuilder SetPurchaseQuantity(int pQty)
             {
                 this.product.purchaseQty = pQty;
                 return this;
             }
-            public ProductBuilder SetMaxOrder(int maxOrder)
+            public BeverageBuilder SetMaxOrder(int maxOrder)
             {
                 this.product.currentlyMaxOrder = maxOrder;
                 return this;
             }
-            public ProductBuilder SetMenuType(string name)
+            public BeverageBuilder SetMenuType(string name)
             {
                 this.product.menu_type = name;
                 return this;
             }
-            public ProductBuilder SetProductName(string name)
+            public BeverageBuilder SetProductName(string name)
             {
                 this.product.menu_name = name;
                 return this;
             }
 
-            public ProductBuilder SetProductDescription(string desc)
+            public BeverageBuilder SetProductDescription(string desc)
             {
                 this.product.menu_description = desc;
                 return this;
             }
 
-            public ProductBuilder SetProductID(int id)
+            public BeverageBuilder SetProductID(int id)
             {
                 this.product.menu_id = id;
                 return this;
             }
 
-            public ProductBuilder SetItemType(string type)
+            public BeverageBuilder SetItemType(string type)
             {
                 this.product.menu_type = type;
                 return this;
             }
 
-            public ProductBuilder SetPrice(double price)
+            public BeverageBuilder SetPrice(double price)
             {
                 this.product.price = price;
                 return this;
             }
 
-            public ProductBuilder SetImage(Image img)
+            public BeverageBuilder SetImage(Image img)
             {
                 this.product.image = img;
                 return this;
             }
 
-            public Product Build()
+            public Beverage Build()
             {
                 return product;
             }

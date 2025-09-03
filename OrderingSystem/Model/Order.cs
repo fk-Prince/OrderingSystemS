@@ -28,7 +28,7 @@ namespace OrderingSystem.Model
                 {
                     total += item.MenuPrice * item.Purchase_Qty;
                 }
-                else if (item is Product p)
+                else if (item is Beverage p)
                 {
                     total += p.VariantPurchased.Variant_price * p.VariantPurchased.Purchase_Qty;
                 }

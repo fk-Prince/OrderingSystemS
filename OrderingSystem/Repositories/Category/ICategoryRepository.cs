@@ -4,8 +4,10 @@ using OrderingSystem.Model;
 
 namespace OrderingSystem.Repositories.Categories
 {
-    public interface IMenuCategoryRepository
+    public interface ICategoryRepository
     {
-        Task<List<Category>> GetCategories();
+        Task<List<Category>> getDishesCategory();
+
+        Task<List<Category>> getProductCategory();
     }
 }

@@ -15,11 +15,11 @@ using Menu = OrderingSystem.Model.Menu;
 
 namespace OrderingSystem.KioskApp
 {
-    public partial class DishFrm : Form
+    public partial class DishesFrm : Form
     {
         private IDishRepository dishRepository;
         private IMenuSelected itemSelected;
-        private IMenuCategoryRepository menuCategoryRepository;
+        private ICategoryRepository menuCategoryRepository;
         private List<Menu> cartList;
         private List<Dish> menus;
         private List<Category> categories;
@@ -30,9 +30,9 @@ namespace OrderingSystem.KioskApp
         private Point dragStart;
         private int startX;
 
-        private static DishFrm instance;
+        private static DishesFrm instance;
         private List<Panel> panels;
-        public DishFrm(IDishRepository dishRepository, IMenuCategoryRepository menuCategoryRepository, IMenuSelected itemSelected, List<Menu> cartList, List<Panel> panels)
+        public DishesFrm(IDishRepository dishRepository, ICategoryRepository menuCategoryRepository, IMenuSelected itemSelected, List<Menu> cartList, List<Panel> panels)
         {
             InitializeComponent();
             this.menuCategoryRepository = menuCategoryRepository;
@@ -42,13 +42,13 @@ namespace OrderingSystem.KioskApp
             this.panels = panels;
             spinner.Start();
         }
-        public static DishFrm MenuFrmFactory(IMenuSelected itemSelected, List<Menu> cartList, List<Panel> panels)
+        public static DishesFrm MenuFrmFactory(IMenuSelected itemSelected, List<Menu> cartList, List<Panel> panels)
         {
             if (instance == null)
             {
-                IMenuCategoryRepository menuCategoryRepository = new MenuCategoryRepository();
+                ICategoryRepository menuCategoryRepository = new CategoryRepository();
                 IDishRepository dishRepository = new DishesRepository();
-                return instance = new DishFrm(dishRepository, menuCategoryRepository, itemSelected, cartList, panels);
+                return instance = new DishesFrm(dishRepository, menuCategoryRepository, itemSelected, cartList, panels);
             }
             else
             {
@@ -73,7 +73,7 @@ namespace OrderingSystem.KioskApp
         {
             try
             {
-                categories = await menuCategoryRepository.GetCategories();
+                categories = await menuCategoryRepository.getDishesCategory();
                 menus = await dishRepository.RetrieveDish();
                 displayDishes(CloneMenuList(menus));
                 displayCategory(categories);

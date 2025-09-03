@@ -11,7 +11,6 @@ using OrderingSystem.KioskApp.BeverageDessert;
 using OrderingSystem.KioskApp.Card;
 using OrderingSystem.KioskApp.Combos;
 using OrderingSystem.KioskApp.Main;
-using OrderingSystem.KioskApp.Products;
 using OrderingSystem.Model;
 using OrderingSystem.Repositories.Kiosk;
 using Menu = OrderingSystem.Model.Menu;
@@ -21,7 +20,7 @@ namespace OrderingSystem.KioskApp
 {
     public partial class KioskLayout : Form, IMenuSelected
     {
-        private List<Model.Menu> cartList = new List<Model.Menu>();
+        private List<Menu> cartList = new List<Model.Menu>();
         private Guna2Button lastClcked;
         private Coupon selectedCoupon;
 
@@ -58,10 +57,10 @@ namespace OrderingSystem.KioskApp
             switch (i)
             {
                 case 1:
-                    LoadForm(DishFrm.MenuFrmFactory(this, cartList, panels));
+                    LoadForm(DishesFrm.MenuFrmFactory(this, cartList, panels));
                     break;
                 case 2:
-                    LoadForm(ProductFrm.ProductFrmFactory(this, cartList, panels));
+                    LoadForm(BeverageFrm.BeverageFrmFactory(this, cartList, panels));
                     break;
                 case 3:
                     LoadForm(AppetizerFrm.AppetizerFrmFactory(this, cartList, panels));
@@ -73,14 +72,8 @@ namespace OrderingSystem.KioskApp
             lastClcked.ForeColor = Color.FromArgb(94, 148, 255);
         }
 
-        private void DessertClicked(object sender, EventArgs e)
-        {
-            LoadForm(DesertFrm.DesertFactory(this, cartList, panels));
-        }
-        private void BeverageClicked(object sender, EventArgs e)
-        {
-            LoadForm(BeverageFrm.BeverageFactory(this, cartList, panels));
-        }
+
+
         public static KioskLayout KioskLayoutFactory(int i)
         {
             return new KioskLayout(1);
@@ -104,19 +97,19 @@ namespace OrderingSystem.KioskApp
         public void SelectedItem(Panel panel, Menu items)
         {
             Menu existingMenu = null;
-            if (items is Product newProd)
+            if (items is Model.Beverage newProd)
             {
                 existingMenu = cartList.FirstOrDefault(p =>
-                        (p is Product pr) &&
+                        (p is Model.Beverage pr) &&
                         pr.MenuType == newProd.MenuType &&
                         pr.MenuID == newProd.MenuID &&
                         pr.VariantPurchased?.VariantID == newProd.VariantPurchased?.VariantID
                     );
             }
-            else if (items is BeverageDesserts bba)
+            else if (items is Dessert bba)
             {
                 existingMenu = cartList.FirstOrDefault(p =>
-                        (p is BeverageDesserts pr) &&
+                        (p is Dessert pr) &&
                         pr.MenuType == bba.MenuType &&
                         pr.MenuID == bba.MenuID &&
                         pr.VariantPurchased?.VariantID == bba.VariantPurchased?.VariantID
@@ -136,7 +129,7 @@ namespace OrderingSystem.KioskApp
                 existingMenu = cartList.FirstOrDefault(p =>
                     p.MenuType == items.MenuType &&
                     p.MenuID == items.MenuID &&
-                  (p is Model.Dish || p is Model.Combo || p is Appetizer || p is BeverageDesserts)
+                  (p is Model.Dish || p is Model.Combo || p is Appetizer || p is Dessert)
                 );
 
             }
@@ -147,7 +140,7 @@ namespace OrderingSystem.KioskApp
                 foreach (CartCard cartItem in flowCart.Controls.OfType<CartCard>())
                 {
 
-                    if (cartItem.Item is Product existingProduct && items is Product newProduct && existingMenu is Product xd)
+                    if (cartItem.Item is Model.Beverage existingProduct && items is Model.Beverage newProduct && existingMenu is Model.Beverage xd)
                     {
                         if (
                             existingProduct.MenuType == newProduct.MenuType &&
@@ -159,7 +152,7 @@ namespace OrderingSystem.KioskApp
                             break;
                         }
                     }
-                    else if (cartItem.Item is BeverageDesserts bb && items is BeverageDesserts aa && existingMenu is BeverageDesserts xx)
+                    else if (cartItem.Item is Dessert bb && items is Dessert aa && existingMenu is Dessert xx)
                     {
                         if (
                             bb.MenuType == aa.MenuType &&
@@ -180,7 +173,7 @@ namespace OrderingSystem.KioskApp
                     else if (cartItem.Item.MenuType == existingMenu.MenuType &&
                              cartItem.Item.MenuID == existingMenu.MenuID &&
                             (cartItem.Item is Dish || cartItem.Item is Combo ||
-                            cartItem.Item is Appetizer || cartItem.Item is Addon || cartItem.Item is BeverageDesserts))
+                            cartItem.Item is Appetizer || cartItem.Item is Addon || cartItem.Item is Dessert))
                     {
                         existingMenu.Purchase_Qty += items.Purchase_Qty;
                         cartItem.updateQuantity(existingMenu.Purchase_Qty);
@@ -227,11 +220,11 @@ namespace OrderingSystem.KioskApp
                         }
                         else if (panel is VariantCard productCard)
                         {
-                            if (items is Product p)
+                            if (items is Model.Beverage p)
                             {
                                 await productCard.UpdateMaxOrder();
                             }
-                            else if (items is BeverageDesserts b)
+                            else if (items is Dessert b)
                             {
                                 await productCard.UpdateMaxOrder();
                             }
@@ -259,9 +252,9 @@ namespace OrderingSystem.KioskApp
         {
             double totalAmount = cartList.Sum(e =>
             {
-                if (e is Product p && p.VariantPurchased != null)
+                if (e is Model.Beverage p && p.VariantPurchased != null)
                     return p.VariantPurchased.Purchase_Qty * p.VariantPurchased.Variant_price;
-                else if (e is BeverageDesserts px && px.VariantPurchased != null)
+                else if (e is Dessert px && px.VariantPurchased != null)
                     return px.VariantPurchased.Purchase_Qty * px.VariantPurchased.Variant_price;
                 else if (e is Dish d)
                 {
@@ -364,16 +357,16 @@ namespace OrderingSystem.KioskApp
             string json = JsonConvert.SerializeObject(cartList);
             Console.WriteLine(json);
             IKioskRepository k = new KioskRepository();
-            //if (selectedCoupon == null)
-            //{
-            //    Order o = new Order(cartList, null);
-            //    k.ConfirmOrder(o);
-            //}
-            //else
-            //{
-            //    Order o = new Order(cartList, selectedCoupon.Coupon_code);
-            //    k.ConfirmOrder(o);
-            //}
+            if (selectedCoupon == null)
+            {
+                Order o = new Order(cartList, null);
+                k.ConfirmOrder(o);
+            }
+            else
+            {
+                Order o = new Order(cartList, selectedCoupon.Coupon_code);
+                k.ConfirmOrder(o);
+            }
         }
 
         private void changePrimary(object sender)
@@ -389,7 +382,12 @@ namespace OrderingSystem.KioskApp
 
         private void DishSideClicked(object sender, EventArgs e)
         {
-            LoadForm(DishFrm.MenuFrmFactory(this, cartList, panels));
+            LoadForm(DishesFrm.MenuFrmFactory(this, cartList, panels));
+            changePrimary(sender);
+        }
+        private void DessertClicked(object sender, EventArgs e)
+        {
+            LoadForm(DessertFrm.DesertFrmFactory(this, cartList, panels));
             changePrimary(sender);
         }
         private void ComboSideClicked(object sender, EventArgs e)
@@ -399,7 +397,7 @@ namespace OrderingSystem.KioskApp
         }
         private void ProductSideClicked(object sender, EventArgs e)
         {
-            LoadForm(ProductFrm.ProductFrmFactory(this, cartList, panels));
+            LoadForm(BeverageFrm.BeverageFrmFactory(this, cartList, panels));
             changePrimary(sender);
         }
         private void AppetizerSideClicked(object sender, EventArgs e)

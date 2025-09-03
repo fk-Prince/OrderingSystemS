@@ -5,14 +5,15 @@ using System.Windows.Forms;
 using MySqlConnector;
 using OrderingSystem.Database;
 using OrderingSystem.Model;
+using OrderingSystem.util;
 
 namespace OrderingSystem.Repositories.BeverageDesserts
 {
-    public class BeverageDessertRepository : IBeverageDessertRepository
+    public class DessertRepository : IDessertRepository
     {
-        public async Task<List<Model.BeverageDesserts>> GetBeverage()
+        public async Task<List<Model.Dessert>> getDessert()
         {
-            List<Model.BeverageDesserts> list = new List<Model.BeverageDesserts>();
+            List<Model.Dessert> list = new List<Model.Dessert>();
 
             var db = MyDatabase.getInstance();
 
@@ -39,9 +40,10 @@ namespace OrderingSystem.Repositories.BeverageDesserts
                             .Build()
                         );
                     }
-                    Model.BeverageDesserts bd = Model.BeverageDesserts.Builder()
+                    Model.Dessert bd = Model.Dessert.Builder()
                         .SetMenuId(reader.GetInt32("menu_id"))
                         .SetMenuName(reader.GetString("menu_name"))
+                        .SetImage(ImageHelper.GetImageFromBlob(reader))
                         .SetDescription(reader.GetString("menu_description"))
                         .SetEstimatedTime(reader.GetTimeSpan("estimated_time"))
                         .SetVariant(vList)
@@ -62,16 +64,16 @@ namespace OrderingSystem.Repositories.BeverageDesserts
             return list;
         }
 
-        public async Task<List<Model.BeverageDesserts>> GetDesert()
+        public async Task<List<Model.Dessert>> GetDesert()
         {
-            List<Model.BeverageDesserts> list = new List<Model.BeverageDesserts>();
+            List<Model.Dessert> list = new List<Model.Dessert>();
 
             var db = MyDatabase.getInstance();
 
             try
             {
                 var conn = await db.GetConnection();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM x_retrieve_beverage_dessert WHERE menu_type = 'Dessert'", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM x_retrieve_dessert WHERE isAvailable = 'Yes'", conn);
                 MySqlDataReader reader = await cmd.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {
@@ -90,9 +92,10 @@ namespace OrderingSystem.Repositories.BeverageDesserts
                             .Build()
                         );
                     }
-                    Model.BeverageDesserts bd = Model.BeverageDesserts.Builder()
-                        .SetMenuId(reader.GetInt32("other_menu_id"))
+                    Model.Dessert bd = Model.Dessert.Builder()
+                        .SetMenuId(reader.GetInt32("dessert_id"))
                         .SetMenuName(reader.GetString("menu_name"))
+                        .SetImage(ImageHelper.GetImageFromBlob(reader))
                         .SetDescription(reader.GetString("menu_description"))
                         .SetEstimatedTime(reader.GetTimeSpan("estimated_time"))
                         .SetVariant(vList)

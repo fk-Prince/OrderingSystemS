@@ -6,18 +6,18 @@ using OrderingSystem.Database;
 using OrderingSystem.Model;
 using OrderingSystem.util;
 
-namespace OrderingSystem.KioskApp.Products
+namespace OrderingSystem.KioskApp.Beverage
 {
-    public class ProductRepository : IProductRepository
+    public class BeverageRepository : IBeverageRepository
     {
-        public async Task<List<Product>> GetProducts()
+        public async Task<List<Model.Beverage>> getBeverage()
         {
-            List<Product> products = new List<Product>();
+            List<Model.Beverage> products = new List<Model.Beverage>();
             var db = MyDatabase.getInstance();
             try
             {
                 var conn = await db.GetConnection();
-                var cmd = new MySqlCommand("SELECT * FROM x_retrieve_product WHERE isAvailable = 'Yes' ", conn);
+                var cmd = new MySqlCommand("SELECT * FROM x_retrieve_beverage WHERE isAvailable = 'Yes' ", conn);
 
                 MySqlDataReader reader = await cmd.ExecuteReaderAsync();
                 if (reader.HasRows)
@@ -41,13 +41,12 @@ namespace OrderingSystem.KioskApp.Products
                             );
                         }
 
-                        Product p = Product.Builder()
+                        Model.Beverage p = Model.Beverage.Builder()
                             .SetMenuType(reader.GetString("menu_type"))
-                            .SetProductID(reader.GetInt32("product_id"))
+                            .SetProductID(reader.GetInt32("beverage_id"))
                             .SetImage(ImageHelper.GetImageFromBlob(reader))
-                            .SetProductCategoryID(reader.GetInt32("product_category_id"))
-                            .SetProductName(reader.GetString("product_name"))
-                            .SetProductDescription(reader.GetString("product_description"))
+                            .SetProductName(reader.GetString("beverage_name"))
+                            .SetProductDescription(reader.GetString("beverage_description"))
                             .SetVariantList(vList)
                             .Build();
 

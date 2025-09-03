@@ -211,7 +211,7 @@ namespace OrderingSystem.KioskApp.Card
             name.Text = menu.MenuName;
 
 
-            if (menu is Product p)
+            if (menu is Model.Beverage p)
             {
                 qty.Text = p.VariantPurchased.Purchase_Qty.ToString();
                 tqty.Text = p.VariantPurchased.Purchase_Qty.ToString();
@@ -219,7 +219,7 @@ namespace OrderingSystem.KioskApp.Card
                 ItemType.Text = p.VariantPurchased.Variant_name;
                 total.Text = (p.VariantPurchased.Variant_price * p.VariantPurchased.Purchase_Qty).ToString("N2");
             }
-            else if (menu is BeverageDesserts x)
+            else if (menu is Dessert x)
             {
                 qty.Text = x.VariantPurchased.Purchase_Qty.ToString();
                 tqty.Text = x.VariantPurchased.Purchase_Qty.ToString();
@@ -255,7 +255,7 @@ namespace OrderingSystem.KioskApp.Card
                     QuantityChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
-            else if (menu is Product p)
+            else if (menu is Model.Beverage p)
             {
                 if (p.VariantPurchased.CurrentlyMaxOrder > int.Parse(qty.Text))
                 {
@@ -285,7 +285,7 @@ namespace OrderingSystem.KioskApp.Card
                 NoQuantity?.Invoke(this, EventArgs.Empty);
             }
 
-            if (menu is Product xp)
+            if (menu is Model.Beverage xp)
             {
                 xp.VariantPurchased.Purchase_Qty = newQty;
             }
@@ -301,7 +301,7 @@ namespace OrderingSystem.KioskApp.Card
             }
             else if (parentPanel is VariantCard pCard)
             {
-                if (menu is Product p && p.VariantPurchased != null)
+                if (menu is Model.Beverage p && p.VariantPurchased != null)
                 {
                     await pCard.UpdateMaxOrder();
                 }

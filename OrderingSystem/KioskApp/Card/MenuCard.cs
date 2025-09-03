@@ -65,7 +65,6 @@ namespace OrderingSystem.KioskApp.Card
         public async Task updateMaxOrder()
         {
             int max = await kioskRepository.getMaxOrderMenu(cartList, menu);
-            this.max.Text = max.ToString();
             this.menu.CurrentlyMaxOrder = max;
 
             quantity.Maximum = max;

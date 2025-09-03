@@ -86,7 +86,7 @@
             this.search.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.search.Location = new System.Drawing.Point(12, 75);
             this.search.Name = "search";
-            this.search.PlaceholderText = "ex. Pork Siomai";
+            this.search.PlaceholderText = "e.g. Pork Siomai";
             this.search.SelectedText = "";
             this.search.Size = new System.Drawing.Size(512, 36);
             this.search.TabIndex = 4;

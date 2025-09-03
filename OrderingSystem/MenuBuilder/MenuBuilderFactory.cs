@@ -50,8 +50,8 @@ namespace OrderingSystem.KioskApp.MenuBuilder
                         .SetCurrentlyMaxOrder(a.CurrentlyMaxOrder)
                         .SetPurchaseQuantity(qty)
                         .Build();
-                case Product p:
-                    return Product.Builder()
+                case Model.Beverage p:
+                    return Model.Beverage.Builder()
                          .SetProductID(p.MenuID)
                          .SetProductName(p.MenuName)
                          .SetItemType(p.MenuType)
@@ -70,8 +70,8 @@ namespace OrderingSystem.KioskApp.MenuBuilder
                         .SetPurchaseQty(qty)
                         .SetAddsOnMaxOrder(a.CurrentlyMaxOrder)
                         .Build();
-                case BeverageDesserts b:
-                    return BeverageDesserts.Builder()
+                case Dessert b:
+                    return Dessert.Builder()
                         .SetMenuType(b.MenuType)
                         .SetMenuId(b.MenuID)
                         .SetEstimatedTime(b.Estimated_time)
